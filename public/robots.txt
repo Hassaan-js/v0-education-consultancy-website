@@ -1,0 +1,21 @@
+# Express Consultancy - Production Robots.txt
+# Allow all search engines to index the website
+
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://expressconsultancy.co.uk/sitemap.xml
+
+# Additional bots
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+# Crawl delay for good citizenship
+Crawl-delay: 1
