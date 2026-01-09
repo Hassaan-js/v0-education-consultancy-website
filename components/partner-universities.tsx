@@ -1,65 +1,95 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import Image from "next/image"
+import { useEffect, useCallback } from "react"
+import useEmblaCarousel from "embla-carousel-react"
+import Autoplay from "embla-carousel-autoplay"
+import { GraduationCap, ExternalLink } from "lucide-react"
 
 const universities = [
-  { name: "Oxford", logo: "/universities/oxford.jpg", tier: "Russell Group" },
-  { name: "Cambridge", logo: "/universities/cambridge.jpg", tier: "Russell Group" },
-  { name: "LSE", logo: "/universities/lse.jpg", tier: "Russell Group" },
-  { name: "Imperial", logo: "/universities/imperial.jpg", tier: "Russell Group" },
-  { name: "UCL", logo: "/universities/ucl.jpg", tier: "Russell Group" },
-  { name: "Edinburgh", logo: "/universities/edinburgh.jpg", tier: "Russell Group" },
-  { name: "Manchester", logo: "/universities/manchester.jpg", tier: "Russell Group" },
-  { name: "Durham", logo: "/universities/durham.jpg", tier: "Russell Group" },
+  { name: "Ulster University", url: "https://www.ulster.ac.uk/", color: "from-blue-500/10 to-indigo-500/10" },
+  { name: "Teesside University", url: "https://www.tees.ac.uk/", color: "from-orange-500/10 to-red-500/10" },
+  { name: "Anglia Ruskin University", url: "https://www.aru.ac.uk/", color: "from-purple-500/10 to-pink-500/10" },
+  { name: "Keele University", url: "https://www.keele.ac.uk/", color: "from-green-500/10 to-emerald-500/10" },
+  { name: "London Metropolitan University", url: "https://www.londonmet.ac.uk/", color: "from-red-500/10 to-rose-500/10" },
+  { name: "University of Hull", url: "https://www.hull.ac.uk/", color: "from-yellow-500/10 to-amber-500/10" },
+  { name: "Middlesex University", url: "https://www.mdx.ac.uk/", color: "from-blue-600/10 to-cyan-500/10" },
+  { name: "University of Bedfordshire", url: "https://www.beds.ac.uk/", color: "from-teal-500/10 to-green-500/10" },
+  { name: "University of Wolverhampton", url: "https://www.wlv.ac.uk/", color: "from-amber-600/10 to-orange-500/10" },
+  { name: "Northumbria University", url: "https://www.northumbria.ac.uk/", color: "from-slate-500/10 to-gray-500/10" },
+  { name: "University of Portsmouth", url: "https://www.port.ac.uk/", color: "from-indigo-600/10 to-purple-500/10" },
+  { name: "Glasgow Caledonian University", url: "https://www.gcu.ac.uk/", color: "from-sky-500/10 to-blue-500/10" },
+  { name: "Canterbury Christ Church", url: "https://www.canterbury.ac.uk/", color: "from-violet-500/10 to-indigo-500/10" },
+  { name: "University of Roehampton", url: "https://www.roehampton.ac.uk/", color: "from-pink-600/10 to-rose-500/10" },
 ]
 
 export default function PartnerUniversities() {
-  const [isVisible, setIsVisible] = useState(false)
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    { loop: true, align: "start", skipSnaps: false },
+    [Autoplay({ delay: 3000, stopOnInteraction: false })]
+  )
 
-  useEffect(() => {
-    setIsVisible(true)
-  }, [])
+  const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi])
+  const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi])
 
   return (
-    <section className="premium-section bg-gradient-to-b from-muted/40 to-background">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center space-y-4 mb-16">
-          <p className="text-primary font-semibold text-xs tracking-widest uppercase bg-primary/10 px-4 py-2 rounded-full hover:bg-primary/15 transition-colors inline-block mx-auto backdrop-blur-sm">
-            Our Network
-          </p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground premium-heading">
-            Partner Universities
+    <section id="universities" className="py-24 bg-white overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16 space-y-4">
+          <div className="inline-flex items-center gap-2 bg-secondary/10 px-4 py-2 rounded-full border border-secondary/20 scale-90">
+            <GraduationCap size={16} className="text-secondary" />
+            <span className="text-secondary font-bold text-[10px] tracking-widest uppercase">Our Global Network</span>
+          </div>
+          <h2 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tight">
+            Partner <span className="text-primary">Universities</span>
           </h2>
-          <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto font-medium">
-            We work with 40+ top-tier universities across the UK. Here are some of our key partners.
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto font-medium leading-relaxed">
+            We collaborate with prestigious UK institutions to provide you with the best educational opportunities.
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
-          {universities.map((uni, index) => (
-            <div
-              key={index}
-              className={`card-premium group cursor-pointer flex flex-col items-center justify-center aspect-square transition-all duration-500 hover:shadow-2xl ${
-                isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
-              }`}
-              style={{ transitionDelay: `${index * 50}ms` }}
-            >
-              <div className="relative w-20 h-20 mb-3 group-hover:scale-110 transition-transform duration-300">
-                <Image
-                  src={uni.logo || "/placeholder.svg"}
-                  alt={`${uni.name} logo`}
-                  fill
-                  className="object-contain"
-                  loading="lazy"
-                />
-              </div>
-              <p className="font-bold text-center text-xs md:text-sm text-foreground">{uni.name}</p>
-              <p className="text-xs text-gray-600 text-center font-medium mt-1">{uni.tier}</p>
+        <div className="relative group">
+          <div className="embla overflow-hidden" ref={emblaRef}>
+            <div className="embla__container flex -ml-4">
+              {universities.map((uni, index) => (
+                <div key={index} className="embla__slide flex-[0_0_100%] min-w-0 pl-4 sm:flex-[0_0_50%] md:flex-[0_0_33.33%] lg:flex-[0_0_25%]">
+                  <a
+                    href={uni.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block group/card h-full"
+                  >
+                    <div className={`h-full bg-gradient-to-br ${uni.color} border border-gray-100 rounded-3xl p-8 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/5 hover:-translate-y-2 flex flex-col items-center text-center relative overflow-hidden`}>
+                      <div className="absolute top-4 right-4 opacity-0 group-hover/card:opacity-100 transition-opacity">
+                        <ExternalLink size={16} className="text-primary" />
+                      </div>
+
+                      <div className="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-6 group-hover/card:scale-110 transition-transform duration-500">
+                        <GraduationCap size={32} className="text-primary" />
+                      </div>
+
+                      <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover/card:text-primary transition-colors line-clamp-2">
+                        {uni.name}
+                      </h3>
+                      <p className="text-xs font-bold text-gray-500 uppercase tracking-widest">
+                        Official Partner
+                      </p>
+                    </div>
+                  </a>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
         </div>
       </div>
+
+      <style jsx>{`
+        .embla {
+          cursor: grab;
+        }
+        .embla:active {
+          cursor: grabbing;
+        }
+      `}</style>
     </section>
   )
 }

@@ -1,7 +1,8 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { BookOpen, TrendingUp, Users, Lightbulb, Code, Globe } from "lucide-react"
+import { BookOpen, TrendingUp, Users, Lightbulb, Code, Globe, ArrowRight } from "lucide-react"
+import LeadFormModal from "./lead-form-modal"
 
 const courses = [
   {
@@ -44,6 +45,8 @@ const courses = [
 
 export default function PopularCourses() {
   const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set())
+  const [showLeadForm, setShowLeadForm] = useState(false)
+  const [selectedCourse, setSelectedCourse] = useState("")
   const cardsRef = useRef<(HTMLDivElement | null)[]>([])
 
   useEffect(() => {
@@ -68,35 +71,28 @@ export default function PopularCourses() {
     return () => observer.disconnect()
   }, [])
 
-  return (
-    <section
-      id="courses"
-      className="premium-section bg-gradient-to-b from-background via-white/50 to-muted/30 relative overflow-hidden"
-    >
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-20 right-0 w-96 h-96 bg-accent/8 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-primary/6 rounded-full blur-3xl" />
-      </div>
+  const handleLearnMore = (title: string) => {
+    setSelectedCourse(title)
+    setShowLeadForm(true)
+  }
 
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center space-y-8 mb-28">
-          <div className="flex items-center justify-center gap-3">
-            <div className="w-14 h-14 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center text-white text-2xl font-bold shadow-lg">
-              🎓
-            </div>
-            <p className="text-primary font-bold text-xs tracking-widest uppercase bg-primary/10 px-6 py-3 rounded-full backdrop-blur-sm border border-primary/20 hover:bg-primary/15 transition-colors duration-300">
-              Academic Excellence
-            </p>
+  return (
+    <section id="courses" className="py-24 bg-gray-50 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-20 space-y-4">
+          <div className="inline-flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full border border-primary/20">
+            <BookOpen size={16} className="text-primary" />
+            <span className="text-primary font-bold text-[10px] tracking-widest uppercase">Popular Programs</span>
           </div>
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-foreground premium-heading text-balance">
-            Popular Courses & Fields
+          <h2 className="text-4xl md:text-5xl font-black text-gray-900 leading-tight">
+            Explore Top <span className="text-primary">Courses & Fields</span>
           </h2>
-          <p className="text-lg md:text-xl text-foreground/70 max-w-3xl mx-auto font-medium leading-relaxed">
-            Explore diverse academic programs available at our premier partner universities across the UK and beyond.
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto font-medium">
+            Discover a wide range of academic programs tailored to your career aspirations in the UK.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {courses.map((course, index) => {
             const Icon = course.icon
             return (
@@ -105,34 +101,30 @@ export default function PopularCourses() {
                 ref={(el) => {
                   cardsRef.current[index] = el
                 }}
-                className={`card-premium group overflow-hidden transition-all duration-500 ${
-                  visibleCards.has(index) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
-                }`}
-                style={{ transitionDelay: `${index * 80}ms` }}
+                className={`transition-all duration-700 ${visibleCards.has(index) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                  }`}
+                style={{ transitionDelay: `${index * 100}ms` }}
               >
-                <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${course.color} shadow-lg`} />
-                <div
-                  className={`absolute -top-24 -right-24 w-48 h-48 bg-gradient-to-br ${course.color} opacity-8 rounded-full blur-3xl group-hover:opacity-15 transition-opacity duration-500`}
-                />
+                <div className="bg-white border border-gray-100 p-10 rounded-[2.5rem] hover:border-primary/20 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 group relative overflow-hidden">
+                  <div className={`absolute top-0 left-10 right-10 h-1.5 bg-gradient-to-r ${course.color} rounded-b-full`} />
 
-                <div className="relative z-10 p-8 sm:p-10">
-                  <div
-                    className={`bg-gradient-to-br ${course.color} w-20 h-20 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-125 group-hover:-rotate-6 transition-all duration-300 shadow-lg group-hover:shadow-xl`}
-                  >
+                  <div className={`w-20 h-20 bg-gradient-to-br ${course.color} rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 group-hover:-rotate-6 transition-all duration-500 shadow-lg`}>
                     <Icon className="text-white" size={40} />
                   </div>
 
-                  <h3 className="text-2xl md:text-2xl font-bold text-foreground mb-6 group-hover:text-primary transition-colors duration-300 leading-tight">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors">
                     {course.title}
                   </h3>
+                  <p className="text-gray-600 leading-relaxed font-medium mb-8">
+                    {course.description}
+                  </p>
 
-                  <p className="text-base text-foreground/70 leading-relaxed font-medium mb-10">{course.description}</p>
-
-                  <button className="inline-flex items-center gap-3 text-primary font-bold text-base hover:gap-5 transition-all duration-300 group/btn hover:text-secondary">
+                  <button
+                    onClick={() => handleLearnMore(course.title)}
+                    className="flex items-center gap-2 text-primary font-bold text-sm uppercase tracking-widest group/btn"
+                  >
                     Learn More
-                    <span className="inline-block group-hover/btn:translate-x-2 transition-transform duration-300 text-xl">
-                      →
-                    </span>
+                    <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
                   </button>
                 </div>
               </div>
@@ -140,6 +132,12 @@ export default function PopularCourses() {
           })}
         </div>
       </div>
+
+      <LeadFormModal
+        isOpen={showLeadForm}
+        onClose={() => setShowLeadForm(false)}
+        formType="inquiry"
+      />
     </section>
   )
 }

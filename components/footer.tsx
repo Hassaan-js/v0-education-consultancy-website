@@ -1,92 +1,91 @@
 "use client"
 
 import Link from "next/link"
-import { Mail, Phone, MapPin, ArrowRight } from "lucide-react"
+import { Mail, Phone, MapPin, Facebook, Linkedin, MessageCircle, Send, ArrowRight } from "lucide-react"
 import { useEffect, useState } from "react"
 
 export default function Footer() {
-  const [currentYear, setCurrentYear] = useState(2024)
+  const [currentYear, setCurrentYear] = useState(2026)
+  const [email, setEmail] = useState("")
 
   useEffect(() => {
     setCurrentYear(new Date().getFullYear())
   }, [])
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    // Newsletter subscription logic
+    alert("Subscribed successfully!")
+    setEmail("")
+  }
+
   const footerSections = [
     {
       title: "Services",
       links: [
-        { label: "UK Study Visa", href: "#" },
-        { label: "University Admissions", href: "#" },
-        { label: "Test Preparation", href: "#" },
-        { label: "Post-Study Work Visas", href: "#" },
+        { label: "UK Study Visa", href: "#services" },
+        { label: "University Admissions", href: "#services" },
+        { label: "Test Preparation", href: "#services" },
+        { label: "Post-Study Work Visas", href: "#services" },
       ],
     },
     {
       title: "Company",
       links: [
         { label: "About Us", href: "#about" },
-        { label: "Our Team", href: "#" },
-        { label: "Success Stories", href: "#testimonials" },
-        { label: "Contact", href: "#contact" },
+        { label: "Success Stories", href: "#success-stories" },
+        { label: "Admission Process", href: "#admission-process" },
+        { label: "Contact Us", href: "#contact" },
       ],
     },
   ]
 
   return (
-    <footer className="bg-gradient-to-b from-gray-950 via-gray-900 to-black text-gray-400 relative overflow-hidden">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl" />
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
-        <div className="grid md:grid-cols-4 gap-12 mb-16">
+    <footer className="bg-gray-950 text-gray-400 py-16 border-t border-white/5">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+          {/* Logo & Info */}
           <div className="space-y-6">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-lg shadow-lg" />
+              <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white font-black text-xl">E</div>
               <div className="flex flex-col">
-                <span className="font-bold text-white text-lg tracking-tight">Express Consultancy</span>
-                <span className="text-xs text-gray-500 font-medium">UK Education Experts</span>
+                <span className="font-bold text-white text-lg tracking-tight uppercase">Express Consultancy</span>
+                <span className="text-[10px] text-primary font-bold tracking-widest uppercase">UK Education Experts</span>
               </div>
             </div>
-            <p className="text-sm leading-relaxed text-gray-400 max-w-xs font-medium">
-              12+ years of expertise in UK student visas, university admissions, and career guidance. Your trusted
-              partner for educational success.
+            <p className="text-sm leading-relaxed max-w-xs">
+              Empowering international students with expert guidance for UK education since 2012. 100% visa success rate guaranteed.
             </p>
-            <div className="flex gap-3 pt-2">
+            <div className="flex gap-4">
               {[
-                { label: "Facebook", href: "#", color: "from-primary" },
-                { label: "LinkedIn", href: "#", color: "from-secondary" },
-                { label: "WhatsApp", href: "https://wa.me/447871820508", color: "from-green-600" },
-              ].map((social) => (
+                { icon: Facebook, href: "https://facebook.com/expressconsultancy", label: "Facebook" },
+                { icon: Linkedin, href: "https://linkedin.com/company/expressconsultancy", label: "LinkedIn" },
+                { icon: MessageCircle, href: "https://wa.me/447871820508", label: "WhatsApp" },
+              ].map((social, i) => (
                 <a
-                  key={social.label}
+                  key={i}
                   href={social.href}
-                  className={`w-10 h-10 bg-gradient-to-br ${social.color} to-primary/50 hover:to-primary rounded-full flex items-center justify-center transition-all duration-300 text-white shadow-md hover:shadow-lg hover:scale-110`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300"
                   aria-label={social.label}
                 >
-                  <span className="text-lg font-bold">{social.label[0]}</span>
+                  <social.icon size={16} />
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Footer Sections */}
-          {footerSections.map((section) => (
-            <div key={section.title} className="space-y-6">
-              <h4 className="font-bold text-white text-lg tracking-tight">{section.title}</h4>
-              <ul className="space-y-3">
-                {section.links.map((item) => (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      className="text-gray-400 hover:text-primary transition-colors duration-300 flex items-center gap-1 group text-sm font-medium"
-                    >
-                      {item.label}
-                      <ArrowRight
-                        size={14}
-                        className="opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300"
-                      />
+          {/* Quick Links */}
+          {footerSections.map((section, i) => (
+            <div key={i} className="space-y-6">
+              <h4 className="font-bold text-white text-base uppercase tracking-widest">{section.title}</h4>
+              <ul className="space-y-4">
+                {section.links.map((link, j) => (
+                  <li key={j}>
+                    <Link href={link.href} className="text-sm hover:text-primary transition-colors flex items-center gap-2 group">
+                      <ArrowRight size={12} className="opacity-0 -ml-4 group-hover:opacity-100 group-hover:ml-0 transition-all" />
+                      {link.label}
                     </Link>
                   </li>
                 ))}
@@ -94,89 +93,71 @@ export default function Footer() {
             </div>
           ))}
 
-          {/* Contact Info */}
+          {/* Newsletter */}
           <div className="space-y-6">
-            <h4 className="font-bold text-white text-lg tracking-tight">Contact Us</h4>
-            <ul className="space-y-4">
-              {[
-                {
-                  icon: Phone,
-                  label: "+44 7871 820508",
-                  detail: "UK Office",
-                  href: "tel:+447871820508",
-                  color: "text-primary",
-                },
-                {
-                  icon: Mail,
-                  label: "info@expressconsultancy.co.uk",
-                  detail: "Email us",
-                  href: "mailto:info@expressconsultancy.co.uk",
-                  color: "text-secondary",
-                },
-                {
-                  icon: MapPin,
-                  label: "1 Alfred Street, Reading",
-                  detail: "RG1 7AT, UK",
-                  href: "#contact",
-                  color: "text-primary",
-                },
-                {
-                  icon: MapPin,
-                  label: "Kashmir Plaza, Blue Area",
-                  detail: "Islamabad, Pakistan",
-                  href: "#contact",
-                  color: "text-secondary",
-                },
-              ].map((item, i) => {
-                const Icon = item.icon
-                return (
-                  <li key={i} className="flex items-start gap-3 group">
-                    <Icon
-                      size={18}
-                      className={`${item.color} flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform duration-300`}
-                    />
-                    <div className="flex flex-col">
-                      <a
-                        href={item.href}
-                        className="text-white font-semibold hover:text-primary transition-colors text-sm"
-                      >
-                        {item.label}
-                      </a>
-                      <span className="text-xs text-gray-500 font-medium">{item.detail}</span>
-                    </div>
-                  </li>
-                )
-              })}
-            </ul>
+            <h4 className="font-bold text-white text-base uppercase tracking-widest">Newsletter</h4>
+            <p className="text-sm">Get the latest UK education updates and scholarship alerts.</p>
+            <form onSubmit={handleSubmit} className="relative">
+              <input
+                type="email"
+                placeholder="Email address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors pr-12"
+              />
+              <button
+                type="submit"
+                className="absolute right-2 top-2 w-8 h-8 bg-primary text-white rounded-lg flex items-center justify-center hover:bg-secondary transition-colors"
+              >
+                <Send size={14} />
+              </button>
+            </form>
           </div>
         </div>
 
-        {/* Divider */}
-        <div className="h-px bg-gradient-to-r from-transparent via-gray-700/50 to-transparent mb-8" />
+        {/* Contact Strip */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 py-8 border-y border-white/5 mb-8">
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-primary shrink-0">
+              <Phone size={18} />
+            </div>
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-gray-500">Call Us</p>
+              <p className="text-sm text-white font-bold">+44 7871 820508</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-primary shrink-0">
+              <Mail size={18} />
+            </div>
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-gray-500">Email Us</p>
+              <p className="text-sm text-white font-bold">info@expressconsultancy.co.uk</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-primary shrink-0">
+              <MapPin size={18} />
+            </div>
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-gray-500">Visit Us</p>
+              <p className="text-sm text-white font-bold">Reading & Islamabad</p>
+            </div>
+          </div>
+        </div>
 
-        {/* Bottom Section */}
+        {/* Bottom */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-          <p className="text-sm text-gray-500 font-medium">
-            &copy; {currentYear} Express Consultancy PVT Ltd. All rights reserved.
+          <p className="text-xs font-medium">
+            &copy; {currentYear} Express Consultancy Ltd. All rights reserved.
           </p>
-          <div className="flex gap-6">
-            {[
-              { label: "Privacy Policy", href: "#" },
-              { label: "Terms of Service", href: "#" },
-            ].map((item, i) => (
-              <div key={item.href} className="flex items-center gap-6">
-                <Link
-                  href={item.href}
-                  className="text-sm text-gray-400 hover:text-primary transition-colors duration-300"
-                >
-                  {item.label}
-                </Link>
-                {i === 0 && <div className="w-px h-4 bg-gray-700" />}
-              </div>
-            ))}
+          <div className="flex gap-8">
+            <Link href="#" className="text-xs hover:text-white transition-colors">Privacy Policy</Link>
+            <Link href="#" className="text-xs hover:text-white transition-colors">Terms of Service</Link>
           </div>
         </div>
       </div>
-    </footer>
+    </section>
   )
 }

@@ -1,7 +1,8 @@
 "use client"
 
-import { Globe, FileText, Plane, Users, BookOpen, Briefcase } from "lucide-react"
+import { Globe, FileText, Plane, Users, BookOpen, Briefcase, ArrowRight } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
+import LeadFormModal from "./lead-form-modal"
 
 const services = [
   {
@@ -9,46 +10,42 @@ const services = [
     title: "UK Study Visa Consultation",
     description:
       "Expert guidance on UK student visa requirements, application process, and documentation. Our specialists ensure smooth visa approval with 100% success rate.",
-    keywords: "study visa, student visa, visa guidance",
   },
   {
     icon: FileText,
-    title: "University Applications & Admissions",
+    title: "University Admissions",
     description:
       "Complete support selecting suitable universities, preparing applications, personal statements, and securing admission offers from top UK institutions.",
-    keywords: "university applications, admissions, personal statements",
   },
   {
     icon: BookOpen,
     title: "Test Preparation Guidance",
     description:
       "Strategic guidance for IELTS, TOEFL, GRE, GMAT and other standardized tests required for UK university admissions.",
-    keywords: "IELTS preparation, test coaching, exam guidance",
   },
   {
     icon: Plane,
-    title: "Pre-Departure & Settlement",
+    title: "Departure & Settlement",
     description:
       "Comprehensive support on accommodation, travel arrangements, insurance, banking, and cultural orientation for your UK arrival.",
-    keywords: "pre-departure, accommodation, settlement",
   },
   {
     icon: Users,
-    title: "Spouse & Family Visa Services",
+    title: "Spouse & Family Visas",
     description:
       "Dedicated assistance for dependent visas, spouse visas, and family settlement in the UK with compliance expertise.",
-    keywords: "spouse visa, family visa, dependent visas",
   },
   {
     icon: Briefcase,
     title: "Post-Study Work Visas",
     description: "Navigate Graduate Route and work visa options to build your career in the UK after graduation.",
-    keywords: "graduate route, post-study work, career visa",
   },
 ]
 
 export default function Services() {
   const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set())
+  const [showLeadForm, setShowLeadForm] = useState(false)
+  const [selectedService, setSelectedService] = useState("")
   const cardsRef = useRef<(HTMLDivElement | null)[]>([])
 
   useEffect(() => {
@@ -73,20 +70,24 @@ export default function Services() {
     return () => observer.disconnect()
   }, [])
 
+  const handleInquiry = (title: string) => {
+    setSelectedService(title)
+    setShowLeadForm(true)
+  }
+
   return (
-    <section id="services" className="premium-section bg-background">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center space-y-6 mb-20">
-          <div className="inline-block mx-auto">
-            <p className="text-primary font-semibold text-xs tracking-widest uppercase bg-primary/5 px-4 py-2 rounded-full hover:bg-primary/10 transition-colors duration-300">
-              Comprehensive Solutions
-            </p>
+    <section id="services" className="py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-20 space-y-4">
+          <div className="inline-flex items-center gap-2 bg-secondary/10 px-4 py-2 rounded-full border border-secondary/20">
+            <Globe size={16} className="text-secondary" />
+            <span className="text-secondary font-bold text-[10px] tracking-widest uppercase">Our Expertise</span>
           </div>
-          <h2 className="text-5xl md:text-6xl font-bold text-foreground premium-heading">
-            UK Education & Visa Services
+          <h2 className="text-4xl md:text-5xl font-black text-gray-900 leading-tight">
+            Our Comprehensive <span className="text-primary">Consultancy Services</span>
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto font-medium">
-            End-to-end support for your UK study visa, university admissions, and career pathways.
+            Tailored solutions to navigate your UK education journey with confidence and ease.
           </p>
         </div>
 
@@ -99,27 +100,39 @@ export default function Services() {
                 ref={(el) => {
                   cardsRef.current[index] = el
                 }}
-                className={`card-premium group relative transition-all duration-500 ${
-                  visibleCards.has(index) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-                }`}
+                className={`transition-all duration-700 ${visibleCards.has(index) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+                  }`}
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-secondary/0 group-hover:from-primary/5 group-hover:to-secondary/5 rounded-2xl transition-all duration-500" />
-
-                <div className="relative z-10">
-                  <div className="bg-gradient-to-br from-primary/10 to-secondary/10 w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:from-primary group-hover:to-secondary transition-all duration-300 shadow-md">
-                    <Icon className="text-primary group-hover:text-white transition-colors duration-300" size={28} />
+                <div className="bg-gray-50 border border-gray-100 p-8 rounded-[2.5rem] hover:bg-white hover:border-primary/20 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 group h-full flex flex-col">
+                  <div className="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300 shrink-0">
+                    <Icon size={28} className="text-primary group-hover:text-white transition-colors" />
                   </div>
-                  <h3 className="text-xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-primary transition-colors">
                     {service.title}
                   </h3>
-                  <p className="text-gray-600 text-base leading-relaxed font-medium">{service.description}</p>
+                  <p className="text-gray-600 leading-relaxed font-medium mb-8 flex-grow">
+                    {service.description}
+                  </p>
+                  <button
+                    onClick={() => handleInquiry(service.title)}
+                    className="flex items-center gap-2 text-primary font-bold text-sm uppercase tracking-widest group/btn"
+                  >
+                    Get Info
+                    <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
+                  </button>
                 </div>
               </div>
             )
           })}
         </div>
       </div>
+
+      <LeadFormModal
+        isOpen={showLeadForm}
+        onClose={() => setShowLeadForm(false)}
+        formType="inquiry"
+      />
     </section>
   )
 }
