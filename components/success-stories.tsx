@@ -1,22 +1,25 @@
 "use client"
 
-import { Star, Quote } from "lucide-react"
+import { useEffect, useRef, useState } from "react"
+import { Star } from "lucide-react"
 
-const testimonialsRow1 = [
+const testimonials = [
   {
     name: "Ahmed Hassan",
     university: "University of Oxford",
-    course: "Computer Science",
+    course: "Master's in Computer Science",
     image: "/professional-man-portrait.jpg",
-    quote: "Express Consultancy transformed my dream into reality. Their guidance was seamless!",
+    quote:
+      "Express Consultancy transformed my dream into reality. Their visa guidance was seamless, and I got admitted to Oxford with a full scholarship!",
     rating: 5,
   },
   {
     name: "Priya Sharma",
-    university: "LSE",
+    university: "London School of Economics",
     course: "MBA",
     image: "/professional-woman-portrait.jpg",
-    quote: "Expertise in university selection was invaluable. Highly recommended for UK studies!",
+    quote:
+      "The team's expertise in university selection and application strategy was absolutely invaluable. Highly recommended!",
     rating: 5,
   },
   {
@@ -24,128 +27,122 @@ const testimonialsRow1 = [
     university: "University of Cambridge",
     course: "PhD in Research",
     image: "/professional-woman-smiling.jpg",
-    quote: "Best decision ever. From visa to settlement, they handled everything professionally.",
+    quote:
+      "Best decision ever. From visa to settlement, they handled everything professionally and promptly. Outstanding support!",
     rating: 5,
   },
-  {
-    name: "Zainab Rashid",
-    university: "University of Manchester",
-    course: "MSc Data Science",
-    image: "/professional-woman-headshot.png",
-    quote: "Amazing team! They helped me secure my visa in record time. Thank you so much!",
-    rating: 5,
-  }
-]
-
-const testimonialsRow2 = [
   {
     name: "Khalid Al-Mansouri",
-    university: "Imperial College",
+    university: "Imperial College London",
     course: "Engineering",
     image: "/professional-man-counselor.jpg",
-    quote: "Their post-study work visa guidance helped me secure a top tech job in London.",
+    quote:
+      "Their post-study work visa guidance helped me secure a top tech job in London. Amazing support throughout my journey!",
     rating: 5,
   },
-  {
-    name: "Suresh Raina",
-    university: "University of Birmingham",
-    course: "MSc Finance",
-    image: "/student-testimonial-man.jpg",
-    quote: "From admission to arrival, the support was constant and professional. 10/10!",
-    rating: 5,
-  },
-  {
-    name: "Elena Petrova",
-    university: "University of Leeds",
-    course: "MA Design",
-    image: "/student-testimonial-woman.jpg",
-    quote: "I was confused about the visa process, but they made it look so easy. Highly expert!",
-    rating: 5,
-  },
-  {
-    name: "Usman Ali",
-    university: "University of Glasgow",
-    course: "LLM Law",
-    image: "/professional-man-headshot.png",
-    quote: "Excellent service and deep knowledge of UK education system. Highly satisfied.",
-    rating: 5,
-  }
 ]
 
-function TestimonialCard({ t }: { t: any }) {
-  return (
-    <div className="flex-shrink-0 w-[400px] bg-white border border-gray-100 p-8 rounded-[2rem] shadow-xl shadow-primary/5 hover:border-primary/20 transition-all duration-300 group">
-      <div className="flex items-center gap-4 mb-6">
-        <img src={t.image} alt={t.name} className="w-14 h-14 rounded-full object-cover border-2 border-primary/20" />
-        <div>
-          <h4 className="font-bold text-gray-900">{t.name}</h4>
-          <p className="text-xs font-bold text-primary uppercase tracking-tight">{t.university}</p>
-        </div>
-      </div>
-      <div className="relative">
-        <Quote className="absolute -top-2 -left-2 text-primary/10 w-8 h-8 -z-10" />
-        <p className="text-gray-600 font-medium leading-relaxed italic line-clamp-3">"{t.quote}"</p>
-      </div>
-      <div className="flex gap-1 mt-6">
-        {[...Array(t.rating)].map((_, i) => (
-          <Star key={i} size={14} className="fill-yellow-400 text-yellow-400" />
-        ))}
-      </div>
-    </div>
-  )
-}
-
 export default function SuccessStories() {
+  const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set())
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([])
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = cardsRef.current.indexOf(entry.target as HTMLDivElement)
+            if (index !== -1) {
+              setVisibleCards((prev) => new Set([...prev, index]))
+            }
+          }
+        })
+      },
+      { threshold: 0.1 },
+    )
+
+    cardsRef.current.forEach((card) => {
+      if (card) observer.observe(card)
+    })
+
+    return () => observer.disconnect()
+  }, [])
+
   return (
-    <section id="success-stories" className="py-24 bg-gray-50 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 mb-20 text-center">
-        <div className="inline-flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full border border-primary/20 mb-6">
-          <Star size={14} className="text-primary fill-primary" />
-          <span className="text-primary font-bold text-[10px] tracking-widest uppercase">Student Success Stories</span>
-        </div>
-        <h2 className="text-4xl md:text-6xl font-black text-gray-900 leading-tight mb-6">
-          Real Stories, <span className="text-primary">Real Success</span>
-        </h2>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto font-medium">
-          See how we've helped hundreds of students achieve their dreams of studying in the UK.
-        </p>
+    <section
+      id="stories"
+      className="premium-section bg-gradient-to-b from-background to-muted/50 relative overflow-hidden"
+    >
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-0 left-1/3 w-96 h-96 bg-secondary/6 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-accent/8 rounded-full blur-3xl" />
       </div>
 
-      <div className="space-y-8">
-        {/* Row 1: Left to Right */}
-        <div className="flex gap-8 animate-marquee whitespace-nowrap">
-          {[...testimonialsRow1, ...testimonialsRow1].map((t, i) => (
-            <TestimonialCard key={i} t={t} />
-          ))}
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center space-y-8 mb-28">
+          <div className="flex items-center justify-center gap-3">
+            <div className="w-14 h-14 bg-gradient-to-br from-accent to-primary rounded-xl flex items-center justify-center text-white text-2xl font-bold shadow-lg">
+              ⭐
+            </div>
+            <p className="text-primary font-bold text-xs tracking-widest uppercase bg-primary/10 px-6 py-3 rounded-full backdrop-blur-sm border border-primary/20 hover:bg-primary/15 transition-colors duration-300">
+              Student Success
+            </p>
+          </div>
+          <h2 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-foreground premium-heading text-balance">
+            Success Stories from Our Students
+          </h2>
+          <p className="text-lg md:text-xl text-foreground/70 max-w-3xl mx-auto font-medium leading-relaxed">
+            Real testimonials from students who achieved their dreams with Express Consultancy's dedicated guidance.
+          </p>
         </div>
 
-        {/* Row 2: Right to Left */}
-        <div className="flex gap-8 animate-marquee-reverse whitespace-nowrap">
-          {[...testimonialsRow2, ...testimonialsRow2].map((t, i) => (
-            <TestimonialCard key={i} t={t} />
+        <div className="grid md:grid-cols-2 gap-10 lg:gap-12">
+          {testimonials.map((testimonial, index) => (
+            <div
+              key={index}
+              ref={(el) => {
+                cardsRef.current[index] = el
+              }}
+              className={`card-premium transition-all duration-500 ${
+                visibleCards.has(index) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+              }`}
+              style={{ transitionDelay: `${index * 100}ms` }}
+            >
+              <div className="flex gap-1.5 mb-8">
+                {[...Array(testimonial.rating)].map((_, i) => (
+                  <Star
+                    key={i}
+                    size={24}
+                    className="fill-accent text-accent hover:scale-110 transition-transform duration-300"
+                  />
+                ))}
+              </div>
+
+              <p className="text-lg leading-relaxed font-medium text-foreground/80 italic mb-12 relative">
+                <span className="text-4xl text-primary/30 absolute -left-4 -top-2">"</span>
+                {testimonial.quote}
+                <span className="text-4xl text-primary/30 absolute -right-4 -bottom-4">"</span>
+              </p>
+
+              <div className="flex items-center gap-4 border-t border-border/60 pt-8">
+                <img
+                  src={testimonial.image || "/placeholder.svg"}
+                  alt={testimonial.name}
+                  className="w-18 h-18 rounded-full object-cover shadow-lg border-3 border-primary/20 hover:border-primary/40 transition-all duration-300"
+                  loading="lazy"
+                />
+                <div className="space-y-2">
+                  <p className="font-bold text-foreground text-lg">{testimonial.name}</p>
+                  <p className="text-base text-primary font-bold">{testimonial.university}</p>
+                  <p className="text-xs text-foreground/70 font-semibold uppercase tracking-wide">
+                    {testimonial.course}
+                  </p>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes marquee {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-        @keyframes marquee-reverse {
-          0% { transform: translateX(-50%); }
-          100% { transform: translateX(0); }
-        }
-        .animate-marquee {
-          animation: marquee 40s linear infinite;
-        }
-        .animate-marquee-reverse {
-          animation: marquee-reverse 40s linear infinite;
-        }
-        .animate-marquee:hover, .animate-marquee-reverse:hover {
-          animation-play-state: paused;
-        }
-      `}</style>
     </section>
   )
 }

@@ -1,125 +1,132 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { ArrowRight, Star, CheckCircle } from "lucide-react"
-import LeadFormModal from "./lead-form-modal"
+import { ArrowRight, Star } from "lucide-react"
+import ConsultationModal from "./consultation-modal"
 
 export default function HeroEnhanced() {
   const [isVisible, setIsVisible] = useState(false)
-  const [showLeadForm, setShowLeadForm] = useState(false)
-  const [formType, setFormType] = useState<"consultation" | "application" | "inquiry">("consultation")
+  const [showConsultationModal, setShowConsultationModal] = useState(false)
 
   useEffect(() => {
     setIsVisible(true)
   }, [])
 
-  const stats = [
-    { number: "250+", label: "Successful Placements" },
-    { number: "40+", label: "Partner Universities" },
-    { number: "12+", label: "Years Experience" },
-    { number: "100%", label: "Visa Success Rate" },
-  ]
+  const handleApplyNow = () => {
+    window.open("https://wa.me/923515123456?text=Hi! I'd like to apply for UK university admission.", "_blank")
+  }
 
   return (
-    <section id="about" className="relative overflow-hidden pt-36 pb-20 md:pb-32 px-4 shadow-inner">
-      {/* Dynamic Background */}
-      <div className="absolute inset-0 -z-10 bg-[#fdfdfd]">
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.03]" />
-        <div className="absolute top-0 right-0 w-[60%] h-full bg-gradient-to-l from-primary/5 via-transparent to-transparent" />
-        <div className="absolute -top-24 -left-24 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-secondary/5 rounded-full blur-3xl animate-pulse" />
-      </div>
+    <>
+      <section className="relative overflow-hidden pt-28 sm:pt-32 md:pt-36 pb-20 sm:pb-24 md:pb-32 px-4 sm:px-6 lg:px-8">
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute inset-0 bg-gradient-to-br from-background via-white to-muted/20" />
+          <div className="absolute top-0 right-0 w-full h-[600px] bg-gradient-to-b from-primary/6 via-secondary/4 to-transparent blur-3xl" />
+          <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-primary/4 rounded-full blur-3xl" />
+          <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
+          <div className="absolute top-40 -right-20 w-80 h-80 bg-secondary/3 rounded-full blur-3xl" />
+        </div>
 
-      <div className="max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Content side */}
-          <div
-            className={`space-y-8 transition-all duration-1000 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-12"}`}
-          >
-            <div className="space-y-6">
-              <div className="inline-flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full border border-primary/20">
-                <Star size={14} className="text-primary fill-primary" />
-                <span className="text-primary font-bold text-[10px] tracking-widest uppercase">Trusted UK Education Experts</span>
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-12 lg:gap-16 xl:gap-24 items-center">
+            <div
+              className={`space-y-8 lg:space-y-10 transition-all duration-1200 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+            >
+              <div className="space-y-6 lg:space-y-8">
+                <div className="inline-block">
+                  <div className="flex items-center gap-2 bg-gradient-to-r from-primary/10 to-secondary/10 px-4 sm:px-6 py-2.5 sm:py-3 rounded-full border border-primary/20 hover:border-primary/40 transition-all duration-300 backdrop-blur-sm">
+                    <Star size={14} className="text-primary flex-shrink-0" fill="currentColor" />
+                    <p className="text-primary font-bold text-xs tracking-widest uppercase">
+                      Your UK Education Gateway
+                    </p>
+                  </div>
+                </div>
+
+                <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold text-foreground leading-tight text-balance premium-heading">
+                  Your Pathway to Global Education Starts Here
+                </h1>
+
+                <p className="text-lg sm:text-xl md:text-2xl text-foreground/75 leading-relaxed text-balance max-w-2xl font-medium">
+                  With 12+ years of proven expertise, we guide international students through UK admissions, visa
+                  processing, and career pathways. Our 100% visa approval rate is backed by dedicated professional
+                  advisors committed to your success.
+                </p>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-foreground leading-[1.1] tracking-tight">
-                Your <span className="text-primary underline decoration-secondary/30">Dream University</span> in the UK is Just One Step Away
-              </h1>
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 lg:pt-6">
+                <button
+                  onClick={() => setShowConsultationModal(true)}
+                  className="button-primary flex items-center justify-center gap-3 group text-sm sm:text-base w-full sm:w-auto"
+                >
+                  Book Free Consultation
+                  <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform duration-300" />
+                </button>
+                <button
+                  onClick={handleApplyNow}
+                  className="button-outline flex items-center justify-center gap-3 group text-sm sm:text-base w-full sm:w-auto"
+                >
+                  Apply Now
+                  <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform duration-300" />
+                </button>
+              </div>
 
-              <p className="text-lg text-gray-600 leading-relaxed max-w-xl font-medium">
-                Unlock global opportunities with Express Consultancy. We provide personalized guidance for university admissions, visa processing, and career planning with a 100% success rate.
-              </p>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-4">
-              <button
-                onClick={() => { setFormType("consultation"); setShowLeadForm(true); }}
-                className="bg-primary hover:bg-secondary text-white px-8 py-4 rounded-full font-bold text-base transition-all duration-300 shadow-xl shadow-primary/20 flex items-center justify-center gap-2 group"
-              >
-                Book Free Consultation
-                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-              </button>
-              <button
-                onClick={() => { setFormType("application"); setShowLeadForm(true); }}
-                className="bg-white hover:bg-gray-50 text-gray-900 border-2 border-gray-200 px-8 py-4 rounded-full font-bold text-base transition-all duration-300 flex items-center justify-center gap-2 group"
-              >
-                Apply Now
-                <CheckCircle size={18} className="text-primary" />
-              </button>
-            </div>
-
-            {/* Stats */}
-            <div className="grid grid-cols-2 sm:flex gap-8 pt-8 border-t border-gray-100">
-              {stats.map((stat, i) => (
-                <div key={i} className="space-y-1">
-                  <p className="text-2xl font-black text-primary">{stat.number}</p>
-                  <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">{stat.label}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Image Side */}
-          <div
-            className={`relative hidden lg:block transition-all duration-1000 delay-300 ${isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}
-          >
-            <div className="absolute inset-0 bg-primary/10 rounded-[3rem] -rotate-3 scale-105 -z-10" />
-            <div className="relative aspect-[4/5] w-full max-w-[500px] mx-auto overflow-hidden rounded-[2.5rem] shadow-2xl border-8 border-white">
-              <img
-                src="/students-at-uk-university-campus.jpg"
-                alt="Students at UK Campus"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-
-              {/* Floating Badge */}
-              <div className="absolute bottom-8 left-8 right-8 bg-white/95 backdrop-blur-md p-6 rounded-2xl shadow-xl flex items-center gap-4 border border-primary/10">
-                <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center shrink-0">
-                  <CheckCircle className="text-green-600" size={24} />
-                </div>
-                <div>
-                  <p className="font-black text-gray-900 text-lg">100% Success Rate</p>
-                  <p className="text-xs font-bold text-gray-500 uppercase">Visa & Admissions Guaranteed</p>
-                </div>
+              <div className="grid grid-cols-2 sm:flex sm:gap-8 lg:gap-12 pt-12 lg:pt-16 border-t border-border/60 gap-6">
+                {[
+                  { number: "250+", label: "Students Placed" },
+                  { number: "40+", label: "Partner Universities" },
+                  { number: "12+", label: "Years Experience" },
+                  { number: "100%", label: "Visa Success Rate" },
+                ].map((stat, i) => (
+                  <div key={i} className="space-y-1.5 lg:space-y-2 group">
+                    <p className="text-3xl sm:text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300">
+                      {stat.number}
+                    </p>
+                    <p className="text-xs sm:text-sm text-foreground/70 font-semibold uppercase tracking-wide">
+                      {stat.label}
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
 
-            {/* Decorative Elements */}
-            <div className="absolute -top-6 -right-6 w-24 h-24 bg-secondary rounded-full flex items-center justify-center text-4xl shadow-xl border-4 border-white animate-bounce">
-              🎓
-            </div>
-            <div className="absolute -bottom-4 -left-12 bg-primary text-white p-4 rounded-2xl shadow-2xl font-bold text-sm -rotate-6">
-              12+ Years Excellence
+            <div
+              className={`relative h-full min-h-96 md:min-h-[550px] hidden md:flex items-center justify-center transition-all duration-1500 delay-300 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-12"}`}
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-secondary/8 to-accent/8 rounded-3xl blur-3xl glow-animation" />
+
+              <div className="relative w-full aspect-square max-w-md">
+                <img
+                  src="/students-at-uk-university-campus.jpg"
+                  alt="International students at UK universities"
+                  className="w-full h-full object-cover rounded-3xl shadow-premium border border-white/30 hover:shadow-premium-hover transition-all duration-500"
+                  loading="lazy"
+                />
+
+                <div className="absolute -bottom-10 -left-10 flex gap-4">
+                  {["🇬🇧", "🇦🇺", "🇨🇦"].map((flag, i) => (
+                    <div
+                      key={i}
+                      className="w-20 h-20 bg-white rounded-full flex items-center justify-center text-4xl shadow-premium border-4 border-primary/40 float-animation hover:scale-125 transition-transform duration-300 cursor-pointer"
+                      style={{ animationDelay: `${i * 0.2}s` }}
+                    >
+                      {flag}
+                    </div>
+                  ))}
+                </div>
+
+                <div className="absolute -bottom-6 -right-8 card-glass p-7 rounded-2xl shadow-premium border-2 border-white/40 backdrop-blur-xl hover:shadow-premium-hover transition-all duration-300">
+                  <p className="font-bold text-xl bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                    100% Success
+                  </p>
+                  <p className="text-sm text-foreground/80 font-semibold">Visa Approval & Admission</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <LeadFormModal
-        isOpen={showLeadForm}
-        onClose={() => setShowLeadForm(false)}
-        formType={formType}
-      />
-    </section>
+      <ConsultationModal isOpen={showConsultationModal} onClose={() => setShowConsultationModal(false)} />
+    </>
   )
 }

@@ -2,70 +2,68 @@
 
 import { useEffect, useRef, useState } from "react"
 import { CheckCircle2, ArrowRight } from "lucide-react"
-import LeadFormModal from "./lead-form-modal"
 
 const steps = [
   {
     number: "01",
-    title: "Expert Consultation",
+    title: "Initial Consultation",
     description:
-      "A personalized session with our expert advisors to map out your academic journey and career goals. We identify the best institutions that align with your aspirations.",
-    duration: "15-30 mins",
+      "Meet with our advisors to understand your academic background, career goals, and preferences. We'll discuss suitable universities and programs tailored to your profile.",
+    duration: "1-2 weeks",
   },
   {
     number: "02",
-    title: "Strategic Selection",
+    title: "University Selection",
     description:
-      "We curate a list of top-tier universities and programs tailored to your profile, ensuring the highest probability of admission and scholarship success.",
-    duration: "1 week",
+      "Based on your profile, we'll recommend 5-10 universities that match your aspirations. We'll provide detailed insights about each institution and campus life.",
+    duration: "1-2 weeks",
   },
   {
     number: "03",
-    title: "Premium Documentation",
+    title: "Application Preparation",
     description:
-      "Professional guidance in crafting compelling Statements of Purpose (SOP), resumes, and letters of recommendation that stand out to admission committees.",
-    duration: "2-3 weeks",
+      "We'll guide you in preparing your application materials: SOP, LOR, resume refinement, and essay writing. Our advisors will provide comprehensive feedback on every document.",
+    duration: "3-4 weeks",
   },
   {
     number: "04",
-    title: "Seamless Application",
+    title: "Submit Applications",
     description:
-      "Dedicated support throughout the submission process. we handle all technicalities and follow-ups to ensure your applications are processed smoothly.",
+      "We'll ensure all applications are submitted on time through UCAS or directly to universities. We'll track submission status and handle any follow-ups.",
     duration: "Ongoing",
   },
   {
     number: "05",
-    title: "Interview Coaching",
+    title: "Interview Preparation",
     description:
-      "Comprehensive interview preparation, including mock sessions and expert tips to build your confidence and ensure a successful outcome.",
-    duration: "1-2 weeks",
+      "Receive personalized interview coaching covering common questions, technical topics, and soft skills. We'll conduct mock interviews to build your confidence.",
+    duration: "2-4 weeks",
   },
   {
     number: "06",
-    title: "Visa & CAS Support",
+    title: "Offer & Visa Processing",
     description:
-      "End-to-end assistance with CAS requests and visa documentation. Our 100% success rate ensures a stress-free transition to your new university.",
-    duration: "3-4 weeks",
+      "Once you receive offers, we'll guide you in making the final choice. Our visa specialists will handle documentation, submission, and follow-ups with UK Visas & Immigration.",
+    duration: "4-8 weeks",
   },
   {
     number: "07",
-    title: "Pre-Arrival Briefing",
+    title: "Pre-Departure Support",
     description:
-      "Essential guidance on accommodation, travel, banking, and life in the UK to ensure you are fully prepared for your international study experience.",
-    duration: "1 week",
+      "Get guidance on accommodation, travel arrangements, banking setup, insurance, and orientation. We'll prepare you for a smooth transition to UK student life.",
+    duration: "2-4 weeks",
   },
   {
     number: "08",
-    title: "Ongoing Support",
+    title: "Post-Arrival & Beyond",
     description:
-      "Our relationship doesn't end at arrival. We provide ongoing support for settlement, career advice, and post-study opportunities in the UK.",
-    duration: "Continuous",
+      "We remain your support system even after you arrive. Assistance with settlement, work visa options, and career guidance throughout your academic journey.",
+    duration: "Ongoing",
   },
 ]
 
 export default function AdmissionProcess() {
   const [visibleSteps, setVisibleSteps] = useState<Set<number>>(new Set())
-  const [showLeadForm, setShowLeadForm] = useState(false)
   const stepsRef = useRef<(HTMLDivElement | null)[]>([])
 
   useEffect(() => {
@@ -91,70 +89,72 @@ export default function AdmissionProcess() {
   }, [])
 
   return (
-    <section id="admission-process" className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="premium-section bg-gradient-to-br from-background via-muted/20 to-secondary/5">
+      <div className="max-w-7xl mx-auto">
         <div className="text-center space-y-4 mb-20">
-          <p className="text-primary font-bold text-[10px] tracking-[0.2em] uppercase bg-primary/5 px-4 py-2 rounded-full inline-block">
-            Your Success Blueprint
+          <p className="text-primary font-semibold text-xs tracking-widest uppercase bg-primary/10 px-4 py-2 rounded-full hover:bg-primary/15 transition-colors inline-block mx-auto backdrop-blur-sm">
+            Your Journey
           </p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 leading-tight">
-            Our Proven <span className="text-primary">Admission Process</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground premium-heading">
+            Your Admission Process
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto font-medium">
-            Join hundreds of successful students who followed our strategic 8-step process to secure their future in the UK.
+          <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto font-medium">
+            We guide you through every step of your UK education journey with genuine support and professional
+            expertise.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
+        <div className="space-y-6">
           {steps.map((step, index) => (
             <div
               key={index}
               ref={(el) => {
                 stepsRef.current[index] = el
               }}
-              className={`transition-all duration-700 ${visibleSteps.has(index) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-                }`}
-              style={{ transitionDelay: `${index * 100}ms` }}
+              className={`transition-all duration-500 ${
+                visibleSteps.has(index) ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4"
+              }`}
+              style={{ transitionDelay: `${index * 75}ms` }}
             >
-              <div className="bg-gray-50 border border-gray-100 p-8 rounded-[2.5rem] hover:bg-white hover:border-primary/20 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 group">
-                <div className="flex items-start gap-6">
-                  <div className="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center text-primary font-black text-2xl group-hover:scale-110 transition-transform duration-500 shrink-0">
-                    {step.number}
-                  </div>
-                  <div className="space-y-3">
-                    <h3 className="text-xl md:text-2xl font-bold text-gray-900 group-hover:text-primary transition-colors">
-                      {step.title}
-                    </h3>
-                    <p className="text-gray-600 leading-relaxed font-medium">
-                      {step.description}
-                    </p>
-                    <div className="flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-widest pt-2">
-                      <CheckCircle2 size={14} />
-                      Duration: {step.duration}
+              <div className="card-premium group hover:shadow-xl transition-all duration-300">
+                <div className="flex flex-col md:flex-row md:items-start gap-6">
+                  {/* Step Number & Icon */}
+                  <div className="flex-shrink-0">
+                    <div className="w-20 h-20 bg-gradient-to-br from-primary to-secondary rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                      <span className="text-white font-bold text-2xl">{step.number}</span>
                     </div>
                   </div>
+
+                  {/* Content */}
+                  <div className="flex-1 space-y-3">
+                    <div className="flex items-center justify-between gap-4">
+                      <h3 className="text-xl md:text-2xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
+                        {step.title}
+                      </h3>
+                      <CheckCircle2 className="text-primary flex-shrink-0 hidden md:block" size={24} />
+                    </div>
+                    <p className="text-base text-gray-600 leading-relaxed font-medium max-w-2xl">{step.description}</p>
+                    <p className="text-sm font-semibold text-primary">Duration: {step.duration}</p>
+                  </div>
+
+                  {/* Arrow */}
+                  {index < steps.length - 1 && (
+                    <ArrowRight className="hidden lg:block text-muted-foreground/30 flex-shrink-0 mt-2" size={20} />
+                  )}
                 </div>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="mt-20 text-center">
-          <button
-            onClick={() => setShowLeadForm(true)}
-            className="bg-primary hover:bg-secondary text-white px-10 py-5 rounded-full font-black text-lg transition-all duration-500 shadow-2xl shadow-primary/20 hover:scale-105 hover:-translate-y-1 flex items-center justify-center gap-3 mx-auto group"
-          >
+        {/* CTA */}
+        <div className="text-center mt-16">
+          <button className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 text-white px-12 py-4 rounded-full font-bold text-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 inline-flex items-center gap-3">
             Start Your Journey Today
-            <ArrowRight size={24} className="group-hover:translate-x-1 transition-transform" />
+            <ArrowRight size={24} />
           </button>
         </div>
       </div>
-
-      <LeadFormModal
-        isOpen={showLeadForm}
-        onClose={() => setShowLeadForm(false)}
-        formType="consultation"
-      />
     </section>
   )
 }

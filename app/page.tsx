@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import Navigation from "@/components/navigation"
+import TickBar from "@/components/tick-bar"
 import HeroEnhanced from "@/components/hero-enhanced"
 import PopularCourses from "@/components/popular-courses"
 import Services from "@/components/services"
@@ -28,6 +29,7 @@ export default function Home() {
   return (
     <>
       <Navigation />
+      <TickBar />
       <main className="bg-background overflow-hidden">
         <HeroEnhanced />
         <section id="courses" aria-labelledby="courses-heading">

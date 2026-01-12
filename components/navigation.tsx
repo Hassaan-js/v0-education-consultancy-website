@@ -2,14 +2,14 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { Menu, X, Phone, MessageCircle, Star } from "lucide-react"
+import { Menu, X, Phone, MessageCircle } from "lucide-react"
 import Image from "next/image"
-import LeadFormModal from "./lead-form-modal"
+import ConsultationModal from "./consultation-modal"
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
-  const [showLeadForm, setShowLeadForm] = useState(false)
+  const [showConsultationModal, setShowConsultationModal] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,6 +19,14 @@ export default function Navigation() {
     window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  const scrollToSection = (href: string) => {
+    const element = document.querySelector(href)
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" })
+      setIsOpen(false)
+    }
+  }
 
   const navItems = [
     { label: "About", href: "#about" },
@@ -30,148 +38,113 @@ export default function Navigation() {
   ]
 
   return (
-    <nav
-      className={`fixed w-full z-50 transition-all duration-300 ${isScrolled
-        ? "bg-white/95 backdrop-blur-2xl border-b border-border/40 shadow-lg"
-        : "bg-white/70 backdrop-blur-md"
+    <>
+      <nav
+        className={`fixed w-full z-50 transition-all duration-300 ${
+          isScrolled
+            ? "bg-white/95 backdrop-blur-xl border-b border-border shadow-lg"
+            : "bg-white/90 backdrop-blur-lg border-b border-border/60"
         }`}
-    >
-      {/* Top Ribbon */}
-      <div className="w-full bg-gradient-to-r from-primary via-secondary to-primary text-white py-2 px-4 shadow-sm">
-        <div className="max-w-7xl mx-auto flex justify-between items-center text-[10px] sm:text-xs font-bold tracking-wider uppercase">
-          <div className="flex items-center gap-2">
-            <Star size={12} className="fill-white" />
-            <span>Your Pathway to Global Education Starts Here</span>
-          </div>
-          <div className="hidden sm:flex items-center gap-6">
-            <a href="tel:+447871820508" className="hover:text-accent transition-colors flex items-center gap-1">
-              <Phone size={12} /> UK: +44 7871 820508
-            </a>
-            <a href="tel:+923001234567" className="hover:text-accent transition-colors flex items-center gap-1">
-              <Phone size={12} /> PK: +92 300 1234567
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
-          {/* Logo Section */}
-          <Link href="/" className="flex items-center gap-3 group shrink-0">
-            <div className="relative w-14 h-14 sm:w-16 sm:h-16">
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-20 md:h-24">
+            <Link href="/" className="flex items-center gap-3 group">
               <Image
                 src="/logo.png"
                 alt="Express Consultancy Logo"
-                fill
-                className="object-contain group-hover:scale-105 transition-transform duration-300"
+                width={50}
+                height={50}
+                className="w-12 h-12 md:w-14 md:h-14 object-contain group-hover:scale-110 transition-transform duration-300"
                 priority
               />
-            </div>
-            <div className="hidden lg:flex flex-col leading-tight">
-              <span className="font-extrabold text-[#b8172d] text-lg tracking-tight uppercase">Express Consultancy</span>
-              <span className="text-[10px] text-secondary font-bold tracking-[0.2em] uppercase">
-                Study & Work In The UK
-              </span>
-            </div>
-          </Link>
+              <div className="hidden sm:flex flex-col leading-tight">
+                <span className="font-bold text-foreground text-base md:text-lg tracking-tight">
+                  Express Consultancy
+                </span>
+                <span className="text-xs text-secondary font-semibold bg-gradient-to-r from-secondary to-primary bg-clip-text text-transparent">
+                  Study & Work In The UK
+                </span>
+              </div>
+            </Link>
 
-          {/* Desktop Navigation Links */}
-          <div className="hidden md:flex items-center gap-1 lg:gap-4">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-xs lg:text-sm text-foreground/80 hover:text-primary transition-all duration-300 font-bold px-3 py-2 rounded-lg hover:bg-primary/5 relative group uppercase tracking-wide"
-              >
-                {item.label}
-                <span className="absolute bottom-1 left-3 w-0 h-0.5 bg-primary group-hover:w-[calc(100%-24px)] transition-all duration-300 rounded-full" />
-              </Link>
-            ))}
-          </div>
-
-          {/* Contact Actions */}
-          <div className="hidden md:flex items-center gap-2 lg:gap-4">
-            <div className="flex flex-col items-end mr-2">
-              <a
-                href="tel:+923001234567"
-                className="text-[11px] lg:text-xs font-bold text-primary hover:text-secondary transition-colors"
-              >
-                PK: +92 300 1234567
-              </a>
-              <a
-                href="https://wa.me/447871820508"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[10px] font-semibold text-green-600 flex items-center gap-1 hover:text-green-700 transition-colors"
-              >
-                <MessageCircle size={10} /> WhatsApp Us
-              </a>
-            </div>
-            <button
-              onClick={() => setShowLeadForm(true)}
-              className="bg-primary hover:bg-secondary text-white text-[11px] lg:text-xs font-bold px-5 py-2.5 rounded-full shadow-lg hover:shadow-primary/20 transition-all duration-300 transform hover:scale-105"
-            >
-              Free Consultation
-            </button>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button onClick={() => setIsOpen(!isOpen)} className="md:hidden p-2 text-primary" aria-label="Toggle menu">
-            {isOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
-        </div>
-
-        {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="md:hidden pb-8 border-t border-border/40 bg-white animate-in slide-in-from-top-4 duration-300">
-            <div className="space-y-1 py-4 px-2">
+            <div className="hidden md:flex items-center gap-2 lg:gap-3">
               {navItems.map((item) => (
-                <Link
+                <button
                   key={item.href}
-                  href={item.href}
-                  className="block py-4 px-4 text-foreground/80 hover:text-primary hover:bg-primary/5 transition-all text-sm font-bold rounded-xl border-l-4 border-transparent hover:border-primary"
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => scrollToSection(item.href)}
+                  className="text-sm text-foreground/80 hover:text-primary transition-colors duration-300 font-medium px-3.5 py-2 rounded-lg hover:bg-primary/5 relative group"
                 >
                   {item.label}
-                </Link>
+                  <span className="absolute bottom-1 left-3.5 w-0 h-0.5 bg-gradient-to-r from-primary to-accent group-hover:w-[calc(100%-28px)] transition-all duration-300 rounded-full" />
+                </button>
               ))}
             </div>
-            <div className="px-4 py-4 space-y-3 border-t border-border/40 mt-4">
-              <div className="grid grid-cols-2 gap-3">
-                <a
-                  href="tel:+923001234567"
-                  className="flex flex-col items-center justify-center p-3 rounded-xl bg-gray-50 border border-gray-100 hover:bg-white hover:border-primary transition-all group"
-                >
-                  <Phone size={18} className="text-primary group-hover:scale-110 transition-transform" />
-                  <span className="text-[10px] font-bold mt-1 uppercase text-gray-500">Call Pakistan</span>
-                </a>
-                <a
-                  href="https://wa.me/447871820508"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex flex-col items-center justify-center p-3 rounded-xl bg-green-50 border border-green-100 hover:bg-white hover:border-green-500 transition-all group"
-                >
-                  <MessageCircle size={18} className="text-green-600 group-hover:scale-110 transition-transform" />
-                  <span className="text-[10px] font-bold mt-1 uppercase text-gray-500">WhatsApp</span>
-                </a>
-              </div>
+
+            <div className="hidden md:flex items-center gap-3 lg:gap-4">
+              <a
+                href="https://wa.me/923515123456?text=Hi! I'd like to learn more about UK education consultancy services."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-green-600 hover:text-green-700 transition-colors text-sm font-semibold group px-4 py-2.5 rounded-full hover:bg-green-50"
+              >
+                <MessageCircle
+                  size={18}
+                  className="group-hover:scale-125 transition-transform duration-300 text-green-600"
+                />
+                <span>WhatsApp</span>
+              </a>
+              <a
+                href="tel:+923515123456"
+                className="flex items-center gap-2 text-foreground/80 hover:text-primary transition-colors text-sm font-semibold group px-4 py-2.5 rounded-full hover:bg-primary/5"
+              >
+                <Phone size={18} className="group-hover:scale-125 transition-transform duration-300" />
+                <span className="hidden lg:inline">+92 351 512 3456</span>
+              </a>
               <button
-                onClick={() => { setShowLeadForm(true); setIsOpen(false); }}
-                className="w-full bg-primary text-white py-4 rounded-xl font-bold shadow-lg shadow-primary/20 hover:bg-secondary transition-all"
+                onClick={() => setShowConsultationModal(true)}
+                className="button-primary shadow-lg text-sm font-semibold"
               >
                 Free Consultation
               </button>
             </div>
-          </div>
-        )}
-      </div>
 
-      <LeadFormModal
-        isOpen={showLeadForm}
-        onClose={() => setShowLeadForm(false)}
-        formType="consultation"
-      />
-    </nav>
+            <button onClick={() => setIsOpen(!isOpen)} className="md:hidden text-foreground" aria-label="Toggle menu">
+              {isOpen ? <X size={26} /> : <Menu size={26} />}
+            </button>
+          </div>
+
+          {isOpen && (
+            <div className="md:hidden pb-8 border-t border-border/40 bg-white/95 backdrop-blur-md animate-in fade-in slide-in-from-top-4 duration-300">
+              <div className="space-y-1 py-4">
+                {navItems.map((item) => (
+                  <button
+                    key={item.href}
+                    onClick={() => scrollToSection(item.href)}
+                    className="block w-full text-left py-3 px-4 text-foreground/80 hover:text-primary hover:bg-primary/5 transition-all text-sm font-medium rounded-lg"
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+              <div className="px-4 py-4 space-y-3 border-t border-border/40 mt-4">
+                <a
+                  href="https://wa.me/923515123456?text=Hi! I'd like to learn more about UK education consultancy services."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="button-secondary w-full text-center block"
+                >
+                  WhatsApp Us
+                </a>
+                <button onClick={() => setShowConsultationModal(true)} className="button-primary w-full">
+                  Free Consultation
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      </nav>
+
+      <ConsultationModal isOpen={showConsultationModal} onClose={() => setShowConsultationModal(false)} />
+    </>
   )
 }
-
