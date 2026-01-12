@@ -1,15 +1,30 @@
 "use client"
 
+import type React from "react"
+
 import Link from "next/link"
-import { Mail, Phone, MapPin, ArrowRight } from "lucide-react"
+import { Mail, Phone, MapPin, ArrowRight, Facebook, Linkedin, MessageCircle } from "lucide-react"
 import { useEffect, useState } from "react"
 
 export default function Footer() {
   const [currentYear, setCurrentYear] = useState(2024)
+  const [email, setEmail] = useState("")
+  const [subscribed, setSubscribed] = useState(false)
 
   useEffect(() => {
     setCurrentYear(new Date().getFullYear())
   }, [])
+
+  const handleNewsletterSubscribe = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (email) {
+      setSubscribed(true)
+      setTimeout(() => {
+        setEmail("")
+        setSubscribed(false)
+      }, 3000)
+    }
+  }
 
   const footerSections = [
     {
@@ -26,7 +41,7 @@ export default function Footer() {
       links: [
         { label: "About Us", href: "#about" },
         { label: "Our Team", href: "#" },
-        { label: "Success Stories", href: "#success-stories" },
+        { label: "Success Stories", href: "#stories" },
         { label: "Contact", href: "#contact" },
       ],
     },
@@ -53,21 +68,27 @@ export default function Footer() {
               12+ years of expertise in UK student visas, university admissions, and career guidance. Your trusted
               partner for educational success.
             </p>
-            <div className="flex gap-3 pt-2">
+            <div className="flex gap-2 pt-2">
               {[
-                { label: "Facebook", href: "#", color: "from-primary" },
-                { label: "LinkedIn", href: "#", color: "from-secondary" },
-                { label: "WhatsApp", href: "https://wa.me/923515123456", color: "from-green-600" },
+                { label: "Facebook", href: "https://facebook.com", Icon: Facebook, color: "hover:text-blue-600" },
+                { label: "LinkedIn", href: "https://linkedin.com", Icon: Linkedin, color: "hover:text-blue-500" },
+                {
+                  label: "WhatsApp",
+                  href: "https://wa.me/923515123456",
+                  Icon: MessageCircle,
+                  color: "hover:text-green-600",
+                },
               ].map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
-                  target={social.href.startsWith("https") ? "_blank" : undefined}
-                  rel={social.href.startsWith("https") ? "noopener noreferrer" : undefined}
-                  className={`w-9 h-9 bg-gradient-to-br ${social.color} to-primary/50 hover:to-primary rounded-full flex items-center justify-center transition-all duration-300 text-white shadow-md hover:shadow-lg hover:scale-110 text-xs font-bold`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`w-8 h-8 bg-gray-800 hover:bg-primary text-gray-400 ${social.color} rounded-full flex items-center justify-center transition-all duration-300 shadow-md hover:shadow-lg hover:scale-110`}
                   aria-label={social.label}
+                  title={social.label}
                 >
-                  {social.label[0]}
+                  <social.Icon size={16} />
                 </a>
               ))}
             </div>
@@ -156,6 +177,27 @@ export default function Footer() {
               })}
             </ul>
           </div>
+        </div>
+
+        <div className="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-xl p-8 mb-8 border border-primary/20">
+          <h4 className="font-bold text-white text-lg mb-4">Subscribe to Our Newsletter</h4>
+          <p className="text-gray-400 text-sm mb-6">Get updates on universities, visa tips, and success stories.</p>
+          <form onSubmit={handleNewsletterSubscribe} className="flex flex-col sm:flex-row gap-3">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="flex-1 px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:border-primary transition-colors"
+            />
+            <button
+              type="submit"
+              className="px-6 py-3 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-lg hover:opacity-90 transition-all duration-300"
+            >
+              {subscribed ? "Subscribed!" : "Subscribe"}
+            </button>
+          </form>
         </div>
 
         <div className="h-px bg-gradient-to-r from-transparent via-gray-700/50 to-transparent mb-8" />

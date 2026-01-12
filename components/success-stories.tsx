@@ -1,7 +1,7 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
-import { Star } from "lucide-react"
+import { useEffect, useState } from "react"
+import { Star, ChevronLeft, ChevronRight } from "lucide-react"
 
 const testimonials = [
   {
@@ -43,30 +43,28 @@ const testimonials = [
 ]
 
 export default function SuccessStories() {
-  const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set())
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([])
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [autoPlay, setAutoPlay] = useState(true)
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const index = cardsRef.current.indexOf(entry.target as HTMLDivElement)
-            if (index !== -1) {
-              setVisibleCards((prev) => new Set([...prev, index]))
-            }
-          }
-        })
-      },
-      { threshold: 0.1 },
-    )
+    if (!autoPlay) return
 
-    cardsRef.current.forEach((card) => {
-      if (card) observer.observe(card)
-    })
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % Math.ceil(testimonials.length / 2))
+    }, 6000)
 
-    return () => observer.disconnect()
-  }, [])
+    return () => clearInterval(interval)
+  }, [autoPlay])
+
+  const handlePrev = () => {
+    setCurrentIndex((prev) => (prev - 1 + Math.ceil(testimonials.length / 2)) % Math.ceil(testimonials.length / 2))
+    setAutoPlay(false)
+  }
+
+  const handleNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % Math.ceil(testimonials.length / 2))
+    setAutoPlay(false)
+  }
 
   return (
     <section
@@ -96,51 +94,88 @@ export default function SuccessStories() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-10 lg:gap-12">
-          {testimonials.map((testimonial, index) => (
+        <div className="relative">
+          <div className="overflow-hidden">
             <div
-              key={index}
-              ref={(el) => {
-                cardsRef.current[index] = el
+              className="flex transition-transform duration-500 ease-out"
+              style={{
+                transform: `translateX(-${currentIndex * 100}%)`,
               }}
-              className={`card-premium transition-all duration-500 ${
-                visibleCards.has(index) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
-              }`}
-              style={{ transitionDelay: `${index * 100}ms` }}
             >
-              <div className="flex gap-1.5 mb-8">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star
-                    key={i}
-                    size={24}
-                    className="fill-accent text-accent hover:scale-110 transition-transform duration-300"
-                  />
-                ))}
-              </div>
+              {Array.from({ length: Math.ceil(testimonials.length / 2) }).map((_, slideIndex) => (
+                <div key={slideIndex} className="w-full flex-shrink-0">
+                  <div className="grid md:grid-cols-2 gap-10 lg:gap-12 px-4">
+                    {testimonials.slice(slideIndex * 2, slideIndex * 2 + 2).map((testimonial, index) => (
+                      <div key={index} className="card-premium">
+                        <div className="flex gap-1.5 mb-8">
+                          {[...Array(testimonial.rating)].map((_, i) => (
+                            <Star
+                              key={i}
+                              size={24}
+                              className="fill-accent text-accent hover:scale-110 transition-transform duration-300"
+                            />
+                          ))}
+                        </div>
 
-              <p className="text-lg leading-relaxed font-medium text-foreground/80 italic mb-12 relative">
-                <span className="text-4xl text-primary/30 absolute -left-4 -top-2">"</span>
-                {testimonial.quote}
-                <span className="text-4xl text-primary/30 absolute -right-4 -bottom-4">"</span>
-              </p>
+                        <p className="text-lg leading-relaxed font-medium text-foreground/80 italic mb-12 relative">
+                          <span className="text-4xl text-primary/30 absolute -left-4 -top-2">"</span>
+                          {testimonial.quote}
+                          <span className="text-4xl text-primary/30 absolute -right-4 -bottom-4">"</span>
+                        </p>
 
-              <div className="flex items-center gap-4 border-t border-border/60 pt-8">
-                <img
-                  src={testimonial.image || "/placeholder.svg"}
-                  alt={testimonial.name}
-                  className="w-18 h-18 rounded-full object-cover shadow-lg border-3 border-primary/20 hover:border-primary/40 transition-all duration-300"
-                  loading="lazy"
-                />
-                <div className="space-y-2">
-                  <p className="font-bold text-foreground text-lg">{testimonial.name}</p>
-                  <p className="text-base text-primary font-bold">{testimonial.university}</p>
-                  <p className="text-xs text-foreground/70 font-semibold uppercase tracking-wide">
-                    {testimonial.course}
-                  </p>
+                        <div className="flex items-center gap-4 border-t border-border/60 pt-8">
+                          <img
+                            src={testimonial.image || "/placeholder.svg"}
+                            alt={testimonial.name}
+                            className="w-18 h-18 rounded-full object-cover shadow-lg border-3 border-primary/20 hover:border-primary/40 transition-all duration-300"
+                            loading="lazy"
+                          />
+                          <div className="space-y-2">
+                            <p className="font-bold text-foreground text-lg">{testimonial.name}</p>
+                            <p className="text-base text-primary font-bold">{testimonial.university}</p>
+                            <p className="text-xs text-foreground/70 font-semibold uppercase tracking-wide">
+                              {testimonial.course}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
-          ))}
+          </div>
+
+          <button
+            onClick={handlePrev}
+            className="absolute -left-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-primary hover:bg-secondary text-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg"
+            aria-label="Previous slide"
+          >
+            <ChevronLeft size={24} />
+          </button>
+          <button
+            onClick={handleNext}
+            className="absolute -right-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-primary hover:bg-secondary text-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-lg"
+            aria-label="Next slide"
+          >
+            <ChevronRight size={24} />
+          </button>
+
+          <div className="flex justify-center gap-2 mt-12">
+            {Array.from({ length: Math.ceil(testimonials.length / 2) }).map((_, i) => (
+              <button
+                key={i}
+                onClick={() => {
+                  setCurrentIndex(i)
+                  setAutoPlay(false)
+                }}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  i === currentIndex ? "bg-primary w-8" : "bg-primary/40 hover:bg-primary/60"
+                }`}
+                aria-label={`Go to slide ${i + 1}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

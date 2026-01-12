@@ -4,21 +4,47 @@ import { useEffect, useState } from "react"
 import Image from "next/image"
 
 const universities = [
-  { name: "Oxford", logo: "/universities/oxford.jpg", tier: "Russell Group" },
-  { name: "Cambridge", logo: "/universities/cambridge.jpg", tier: "Russell Group" },
-  { name: "LSE", logo: "/universities/lse.jpg", tier: "Russell Group" },
-  { name: "Imperial", logo: "/universities/imperial.jpg", tier: "Russell Group" },
-  { name: "UCL", logo: "/universities/ucl.jpg", tier: "Russell Group" },
-  { name: "Edinburgh", logo: "/universities/edinburgh.jpg", tier: "Russell Group" },
-  { name: "Manchester", logo: "/universities/manchester.jpg", tier: "Russell Group" },
-  { name: "Durham", logo: "/universities/durham.jpg", tier: "Russell Group" },
+  { name: "Ulster University", logo: "/universities/ulster.jpg", website: "https://www.ulster.ac.uk" },
+  { name: "Teesside University", logo: "/universities/teesside.jpg", website: "https://www.tees.ac.uk" },
+  { name: "Anglia Ruskin University", logo: "/universities/anglia-ruskin.jpg", website: "https://www.anglia.ac.uk" },
+  { name: "Keele University", logo: "/universities/keele.jpg", website: "https://www.keele.ac.uk" },
+  {
+    name: "London Metropolitan University",
+    logo: "/universities/london-metro.jpg",
+    website: "https://www.londonmet.ac.uk",
+  },
+  { name: "University of Hull", logo: "/universities/hull.jpg", website: "https://www.hull.ac.uk" },
+  { name: "Middlesex University", logo: "/universities/middlesex.jpg", website: "https://www.mdx.ac.uk" },
+  { name: "University of Bedfordshire", logo: "/universities/bedfordshire.jpg", website: "https://www.beds.ac.uk" },
+  { name: "University of Wolverhampton", logo: "/universities/wolverhampton.jpg", website: "https://www.wlv.ac.uk" },
+  { name: "Northumbria University", logo: "/universities/northumbria.jpg", website: "https://www.northumbria.ac.uk" },
+  { name: "University of Portsmouth", logo: "/universities/portsmouth.jpg", website: "https://www.port.ac.uk" },
+  {
+    name: "Glasgow Caledonian University",
+    logo: "/universities/glasgow-caledonian.jpg",
+    website: "https://www.gcu.ac.uk",
+  },
+  {
+    name: "Canterbury Christ Church University",
+    logo: "/universities/canterbury.jpg",
+    website: "https://www.canterbury.ac.uk",
+  },
+  { name: "University of Roehampton", logo: "/universities/roehampton.jpg", website: "https://www.roehampton.ac.uk" },
+  { name: "Coventry University", logo: "/universities/coventry.jpg", website: "https://www.coventry.ac.uk" },
 ]
 
 export default function PartnerUniversities() {
+  const [scrollPosition, setScrollPosition] = useState(0)
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
     setIsVisible(true)
+
+    const interval = setInterval(() => {
+      setScrollPosition((prev) => (prev + 1) % universities.length)
+    }, 5000)
+
+    return () => clearInterval(interval)
   }, [])
 
   return (
@@ -36,28 +62,34 @@ export default function PartnerUniversities() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
-          {universities.map((uni, index) => (
-            <div
-              key={index}
-              className={`card-premium group cursor-pointer flex flex-col items-center justify-center aspect-square transition-all duration-500 hover:shadow-2xl ${
-                isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
-              }`}
-              style={{ transitionDelay: `${index * 50}ms` }}
-            >
-              <div className="relative w-20 h-20 mb-3 group-hover:scale-110 transition-transform duration-300">
-                <Image
-                  src={uni.logo || "/placeholder.svg"}
-                  alt={`${uni.name} logo`}
-                  fill
-                  className="object-contain"
-                  loading="lazy"
-                />
-              </div>
-              <p className="font-bold text-center text-xs md:text-sm text-foreground">{uni.name}</p>
-              <p className="text-xs text-gray-600 text-center font-medium mt-1">{uni.tier}</p>
-            </div>
-          ))}
+        <div className="overflow-hidden relative">
+          <div
+            className="flex gap-4 transition-transform duration-500 ease-out"
+            style={{
+              transform: `translateX(-${scrollPosition * (100 / 5)}%)`,
+            }}
+          >
+            {universities.map((uni, index) => (
+              <a
+                key={index}
+                href={uni.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-shrink-0 w-1/2 md:w-1/3 lg:w-1/5 card-premium group cursor-pointer flex flex-col items-center justify-center aspect-square transition-all duration-500 hover:shadow-2xl hover:scale-105"
+              >
+                <div className="relative w-24 h-24 mb-3 group-hover:scale-110 transition-transform duration-300">
+                  <Image
+                    src={uni.logo || "/placeholder.svg"}
+                    alt={`${uni.name} logo`}
+                    fill
+                    className="object-contain"
+                    loading="lazy"
+                  />
+                </div>
+                <p className="font-bold text-center text-xs md:text-sm text-foreground text-balance">{uni.name}</p>
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </section>
