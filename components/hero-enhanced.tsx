@@ -36,13 +36,13 @@ export default function HeroEnhanced() {
                 <div className="inline-block">
                   <div className="flex items-center gap-2 bg-gradient-to-r from-primary/10 to-secondary/10 px-4 sm:px-6 py-2.5 sm:py-3 rounded-full border border-primary/20 hover:border-primary/40 transition-all duration-300 backdrop-blur-sm">
                     <Star size={14} className="text-primary flex-shrink-0" fill="currentColor" />
-                    <p className="text-primary font-bold text-xs tracking-widest uppercase">
+                    <p className="text-primary font-bold tracking-widest uppercase text-lg">
                       Your UK Education Gateway
                     </p>
                   </div>
                 </div>
 
-                <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold text-foreground leading-tight text-balance premium-heading">
+                <h1 className="text-5xl sm:text-6xl lg:text-8xl text-foreground leading-tight text-balance premium-heading font-bold md:text-6xl">
                   Your Pathway to Global Education Starts Here
                 </h1>
 

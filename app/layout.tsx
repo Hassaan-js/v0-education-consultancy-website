@@ -1,8 +1,14 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
+
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
+
+import { Geist_Mono, Heebo as V0_Font_Heebo, Geist_Mono as V0_Font_Geist_Mono } from 'next/font/google'
+
+// Initialize fonts
+const _heebo = V0_Font_Heebo({ subsets: ['latin'], weight: ["100","200","300","400","500","600","700","800","900"] })
+const _geistMono = V0_Font_Geist_Mono({ subsets: ['latin'], weight: ["100","200","300","400","500","600","700","800","900"] })
 
 const geist = Geist({ subsets: ["latin"], display: "swap" })
 const geistMono = Geist_Mono({ subsets: ["latin"], display: "swap" })
