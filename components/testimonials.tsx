@@ -5,36 +5,58 @@ import { useEffect, useRef, useState } from "react"
 
 const testimonials = [
   {
-    name: "Amina Hassan",
-    location: "Cambridge University, UK",
+    name: "Bilal Ahmed",
+    location: "Oxford University",
     quote:
-      "Express Consultancy made my UK university admission seamless. Their visa expertise and support throughout the process was invaluable. Highly recommended!",
+      "I applied for a study visa through Express Consultancy in 2022 and I'm extremely pleased with their services. The team members were genuinely professional and exceptionally helpful, especially Mr. Shahid Abass, the manager, who provided excellent guidance throughout the process. Within just one and a half months, my entire application was processed, and I moved to the UK. I wholeheartedly recommend their services.",
     rating: 5,
-    image: "/professional-woman-headshot.png",
+    reviews: 1,
+    image: "/testimonials/bilal-ahmed.jpg",
   },
   {
-    name: "Ali Raza",
-    location: "University of Manchester, UK",
+    name: "Hazam Kiani",
+    location: "Cambridge University",
     quote:
-      "Outstanding service from start to finish. The team's knowledge of UK immigration and university requirements is unmatched. Got my visa approved on first attempt!",
+      "Supportive staff, really help you with everything you don't need to be worried about any working. They charge nothing until work is done. You can check and meet them whenever you want and they are really trust worthy.",
     rating: 5,
-    image: "/professional-man-headshot.png",
+    reviews: 2,
+    image: "/testimonials/hazam-kiani.jpg",
   },
   {
-    name: "Zara Khan",
-    location: "London School of Economics, UK",
+    name: "Muhammad Jamal",
+    location: "Imperial College London",
     quote:
-      "Professional, knowledgeable, and genuinely caring team. They treated my case with utmost importance and ensured smooth admission to LSE. Best decision ever!",
+      "Very efficient, reliable and professional people at Express Consultancy. Level of support and guidance through the process was exceptional. Highly recommended!",
     rating: 5,
-    image: "/professional-woman-headshot.png",
+    reviews: 3,
+    image: "/testimonials/muhammad-jamal.jpg",
   },
   {
-    name: "Ahmed Malik",
-    location: "University of Oxford, UK",
+    name: "Talha Naseer",
+    location: "LSE (London School of Economics)",
     quote:
-      "Express Consultancy's personalized approach and 100% visa success rate speaks for itself. They guided me through every step professionally and confidently.",
+      "Reliable and efficient advisory for study abroad and immigration. Every step in the whole process were smooth. Excellent work ethics and contacts. Working offices both in UK and Pak. And all that I got from personal experiences.",
     rating: 5,
-    image: "/professional-man-headshot.png",
+    reviews: 6,
+    image: "/testimonials/talha-naseer.jpg",
+  },
+  {
+    name: "MustaJab AHMAD",
+    location: "University of Manchester",
+    quote:
+      "EC was a great help during my journey to study in the UK. I was one of the pioneer and they guided me in choosing the right university and course. Their support made the application and visa processes much easier because they have a registered office in the UK and you can directly involve with the Uni and develop more understanding. I highly recommend Express Consultancy to any student wanting to study abroad.",
+    rating: 5,
+    reviews: 5,
+    image: "/testimonials/mustajab-ahmad.jpg",
+  },
+  {
+    name: "Rohaan Zaheer",
+    location: "University of Edinburgh",
+    quote:
+      "I visit lot of consultants but Express Consultancy is on top they help me about my visa. Staff was really friendly and always ready to help you. Thank you very much for your services",
+    rating: 5,
+    reviews: 4,
+    image: "/testimonials/rohaan-zaheer.jpg",
   },
 ]
 
@@ -76,7 +98,7 @@ export default function Testimonials() {
           <h2 className="text-5xl md:text-6xl font-bold text-foreground premium-heading">What Our Students Say</h2>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
@@ -92,24 +114,28 @@ export default function Testimonials() {
                 <Quote size={20} className="text-primary group-hover:text-white transition-colors duration-300" />
               </div>
 
-              <div className="flex gap-1 mb-6">
+              <div className="flex gap-1 mb-4">
                 {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} size={18} className="fill-primary text-primary" />
+                  <Star key={i} size={16} className="fill-primary text-primary" />
                 ))}
+                <span className="text-xs text-gray-500 ml-2">a year ago</span>
               </div>
 
-              <p className="text-gray-700 mb-8 leading-relaxed text-base italic font-medium">"{testimonial.quote}"</p>
+              <p className="text-gray-700 mb-6 leading-relaxed text-sm italic font-medium">"{testimonial.quote}"</p>
 
-              <div className="border-t border-border/60 pt-6 flex items-center gap-4">
+              <div className="border-t border-border/60 pt-4 flex items-center gap-3">
                 <img
                   src={testimonial.image || "/placeholder.svg"}
                   alt={testimonial.name}
-                  className="w-12 h-12 rounded-full object-cover border border-border/60"
+                  className="w-10 h-10 rounded-full object-cover border border-border/60"
                   loading="lazy"
                 />
                 <div>
-                  <p className="font-bold text-foreground text-base">{testimonial.name}</p>
-                  <p className="text-primary text-sm font-semibold">{testimonial.location}</p>
+                  <p className="font-bold text-foreground text-sm">{testimonial.name}</p>
+                  <p className="text-primary text-xs font-semibold">
+                    {testimonial.reviews} review{testimonial.reviews > 1 ? "s" : ""}
+                  </p>
+                  <p className="text-gray-500 text-xs">{testimonial.location}</p>
                 </div>
               </div>
             </div>
