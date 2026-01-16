@@ -5,39 +5,57 @@ import { Star, ChevronLeft, ChevronRight } from "lucide-react"
 
 const testimonials = [
   {
-    name: "Ahmed Hassan",
-    university: "University of Oxford",
-    course: "Master's in Computer Science",
-    image: "/professional-man-portrait.jpg",
+    name: "Bilal Ahmed",
+    university: "Ulster University",
+    course: "Business Management",
+    image: "/young-pakistani-man-professional-headshot.jpg",
     quote:
-      "Express Consultancy transformed my dream into reality. Their visa guidance was seamless, and I got admitted to Oxford with a full scholarship!",
+      "I applied for a study visa through Express Consultancy in 2022 and I'm extremely pleased with their services. The team members were genuinely professional and exceptionally helpful, especially Mr. Shujat Abbasi, the manager, who provided excellent guidance throughout the process. Within just one and a half months, my entire application was processed, and I successfully obtained my UK visa. I wholeheartedly recommend their services.",
     rating: 5,
   },
   {
-    name: "Priya Sharma",
-    university: "London School of Economics",
+    name: "Hazam Kiani",
+    university: "Teesside University",
+    course: "Computer Science",
+    image: "/young-pakistani-man-casual-headshot.jpg",
+    quote:
+      "Supportive staff, really help you with everything you don't need to be worried about any working. They charge nothing until work is done. You can call and meet them whenever you want and they are really trust worthy.",
+    rating: 5,
+  },
+  {
+    name: "Muhammad Jamal",
+    university: "Anglia Ruskin University",
+    course: "Healthcare Management",
+    image: "/pakistani-man-with-glasses-professional.jpg",
+    quote:
+      "Very efficient, reliable and professional people at Express Consultancy. Level of support and guidance through the process was exceptional. Highly recommended!",
+    rating: 5,
+  },
+  {
+    name: "Talha Naseer",
+    university: "University of Bedfordshire",
     course: "MBA",
-    image: "/professional-woman-portrait.jpg",
+    image: "/young-pakistani-man-smiling-professional.jpg",
     quote:
-      "The team's expertise in university selection and application strategy was absolutely invaluable. Highly recommended!",
+      "Reliable and efficient advisory for study abroad and immigration. Every step in the whole process were smooth. Excellent work ethics and informational contacts. Working offices both in UK and Pak. And all that i got from personal experiences.",
     rating: 5,
   },
   {
-    name: "Maria Santos",
-    university: "University of Cambridge",
-    course: "PhD in Research",
-    image: "/professional-woman-smiling.jpg",
-    quote:
-      "Best decision ever. From visa to settlement, they handled everything professionally and promptly. Outstanding support!",
-    rating: 5,
-  },
-  {
-    name: "Khalid Al-Mansouri",
-    university: "Imperial College London",
+    name: "Mustajab Ahmad",
+    university: "Northumbria University",
     course: "Engineering",
-    image: "/professional-man-counselor.jpg",
+    image: "/young-pakistani-man-formal-attire.jpg",
     quote:
-      "Their post-study work visa guidance helped me secure a top tech job in London. Amazing support throughout my journey!",
+      "EC was a great help during my journey to study in the UK. I was one of the pioneer and they guided me in choosing the right university and course. Their support made the application and visa processes much easier because they have a registered office in the UK and you can directly involve with the Uni and develop more understanding. I highly recommend Express Consultancy to any student wanting to study abroad.",
+    rating: 5,
+  },
+  {
+    name: "Rohaan Zaheer",
+    university: "University of Hull",
+    course: "International Business",
+    image: "/pakistani-man-casual-portrait.jpg",
+    quote:
+      "I visit lot of consultants but Express Consultancy is on top they help me about my visa. Staff was really friendly and always ready to help you, Thank you very much for your services",
     rating: 5,
   },
 ]

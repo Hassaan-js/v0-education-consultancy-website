@@ -6,57 +6,57 @@ import { useEffect, useRef, useState } from "react"
 const testimonials = [
   {
     name: "Bilal Ahmed",
-    location: "Oxford University",
+    location: "Ulster University",
     quote:
-      "I applied for a study visa through Express Consultancy in 2022 and I'm extremely pleased with their services. The team members were genuinely professional and exceptionally helpful, especially Mr. Shahid Abass, the manager, who provided excellent guidance throughout the process. Within just one and a half months, my entire application was processed, and I moved to the UK. I wholeheartedly recommend their services.",
+      "I applied for a study visa through Express Consultancy in 2022 and I'm extremely pleased with their services. The team members were genuinely professional and exceptionally helpful, especially Mr. Shujat Abbasi, the manager, who provided excellent guidance throughout the process. Within just one and a half months, my entire application was processed, and I successfully obtained my UK visa. I wholeheartedly recommend their services.",
     rating: 5,
-    reviews: 1,
-    image: "/testimonials/bilal-ahmed.jpg",
+    reviews: 4,
+    image: "/young-pakistani-man-professional-headshot.jpg",
   },
   {
     name: "Hazam Kiani",
-    location: "Cambridge University",
+    location: "Teesside University",
     quote:
-      "Supportive staff, really help you with everything you don't need to be worried about any working. They charge nothing until work is done. You can check and meet them whenever you want and they are really trust worthy.",
+      "Supportive staff, really help you with everything you don't need to be worried about any working. They charge nothing until work is done. You can call and meet them whenever you want and they are really trust worthy.",
     rating: 5,
     reviews: 2,
-    image: "/testimonials/hazam-kiani.jpg",
+    image: "/young-pakistani-man-casual-headshot.jpg",
   },
   {
     name: "Muhammad Jamal",
-    location: "Imperial College London",
+    location: "Anglia Ruskin University",
     quote:
       "Very efficient, reliable and professional people at Express Consultancy. Level of support and guidance through the process was exceptional. Highly recommended!",
     rating: 5,
     reviews: 3,
-    image: "/testimonials/muhammad-jamal.jpg",
+    image: "/pakistani-man-with-glasses-professional.jpg",
   },
   {
     name: "Talha Naseer",
-    location: "LSE (London School of Economics)",
+    location: "University of Bedfordshire",
     quote:
-      "Reliable and efficient advisory for study abroad and immigration. Every step in the whole process were smooth. Excellent work ethics and contacts. Working offices both in UK and Pak. And all that I got from personal experiences.",
+      "Reliable and efficient advisory for study abroad and immigration. Every step in the whole process were smooth. Excellent work ethics and informational contacts. Working offices both in UK and Pak. And all that i got from personal experiences.",
     rating: 5,
     reviews: 6,
-    image: "/testimonials/talha-naseer.jpg",
+    image: "/young-pakistani-man-smiling-professional.jpg",
   },
   {
-    name: "MustaJab AHMAD",
-    location: "University of Manchester",
+    name: "Mustajab Ahmad",
+    location: "Northumbria University",
     quote:
       "EC was a great help during my journey to study in the UK. I was one of the pioneer and they guided me in choosing the right university and course. Their support made the application and visa processes much easier because they have a registered office in the UK and you can directly involve with the Uni and develop more understanding. I highly recommend Express Consultancy to any student wanting to study abroad.",
     rating: 5,
     reviews: 5,
-    image: "/testimonials/mustajab-ahmad.jpg",
+    image: "/young-pakistani-man-formal-attire.jpg",
   },
   {
     name: "Rohaan Zaheer",
-    location: "University of Edinburgh",
+    location: "University of Hull",
     quote:
-      "I visit lot of consultants but Express Consultancy is on top they help me about my visa. Staff was really friendly and always ready to help you. Thank you very much for your services",
+      "I visit lot of consultants but Express Consultancy is on top they help me about my visa. Staff was really friendly and always ready to help you, Thank you very much for your services",
     rating: 5,
     reviews: 4,
-    image: "/testimonials/rohaan-zaheer.jpg",
+    image: "/pakistani-man-casual-portrait.jpg",
   },
 ]
 
