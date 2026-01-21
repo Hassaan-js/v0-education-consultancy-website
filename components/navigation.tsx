@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { Menu, X, Phone, MessageCircle } from "lucide-react"
+import { Menu, X } from "lucide-react"
 import Image from "next/image"
 import ConsultationModal from "./consultation-modal"
 
@@ -81,28 +81,15 @@ export default function Navigation() {
             </div>
 
             <div className="hidden md:flex items-center gap-3 lg:gap-4">
-              <a
-                href="https://wa.me/923515123456?text=Hi! I'd like to learn more about UK education consultancy services."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-green-600 hover:text-green-700 transition-colors text-sm font-semibold group px-4 py-2.5 rounded-full hover:bg-green-50"
+              <button
+                onClick={() => scrollToSection("#contact")}
+                className="button-primary shadow-lg text-sm font-semibold px-6 py-2.5"
               >
-                <MessageCircle
-                  size={18}
-                  className="group-hover:scale-125 transition-transform duration-300 text-green-600"
-                />
-                <span>WhatsApp</span>
-              </a>
-              <a
-                href="tel:+923515123456"
-                className="flex items-center gap-2 text-foreground/80 hover:text-primary transition-colors text-sm font-semibold group px-4 py-2.5 rounded-full hover:bg-primary/5"
-              >
-                <Phone size={18} className="group-hover:scale-125 transition-transform duration-300" />
-                <span className="hidden lg:inline">+92 351 512 3456</span>
-              </a>
+                Contact Us
+              </button>
               <button
                 onClick={() => setShowConsultationModal(true)}
-                className="button-primary shadow-lg text-sm font-semibold"
+                className="text-primary hover:text-primary/80 transition-colors text-sm font-bold px-4 py-2 rounded-full hover:bg-primary/5 border border-primary/20"
               >
                 Free Consultation
               </button>
@@ -127,15 +114,16 @@ export default function Navigation() {
                 ))}
               </div>
               <div className="px-4 py-4 space-y-3 border-t border-border/40 mt-4">
-                <a
-                  href="https://wa.me/923515123456?text=Hi! I'd like to learn more about UK education consultancy services."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="button-secondary w-full text-center block"
+                <button
+                  onClick={() => scrollToSection("#contact")}
+                  className="button-primary w-full text-center block"
                 >
-                  WhatsApp Us
-                </a>
-                <button onClick={() => setShowConsultationModal(true)} className="button-primary w-full">
+                  Contact Us
+                </button>
+                <button
+                  onClick={() => setShowConsultationModal(true)}
+                  className="w-full text-center py-3 px-4 text-primary font-bold text-sm rounded-full border border-primary/20 hover:bg-primary/5 transition-all"
+                >
                   Free Consultation
                 </button>
               </div>
