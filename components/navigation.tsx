@@ -48,20 +48,21 @@ export default function Navigation() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20 md:h-24">
-            <Link href="/" className="flex items-center gap-3 group">
-              <Image
-                src="/logo.png"
-                alt="Express Consultancy Logo"
-                width={50}
-                height={50}
-                className="w-12 h-12 md:w-14 md:h-14 object-contain group-hover:scale-110 transition-transform duration-300"
-                priority
-              />
-              <div className="hidden sm:flex flex-col leading-tight">
-                <span className="font-bold text-foreground text-base md:text-lg tracking-tight">
+            <Link href="/" className="flex flex-col items-center group py-1">
+              <div className="relative w-16 h-16 md:w-20 md:h-20 -mb-1">
+                <Image
+                  src="/logo.png"
+                  alt="Express Consultancy Logo"
+                  fill
+                  className="object-contain group-hover:scale-105 transition-transform duration-300"
+                  priority
+                />
+              </div>
+              <div className="flex flex-col items-center leading-tight">
+                <span className="font-bold text-foreground text-sm md:text-base tracking-tight">
                   Express Consultancy
                 </span>
-                <span className="text-xs text-secondary font-semibold bg-gradient-to-r from-secondary to-primary bg-clip-text text-transparent">
+                <span className="text-[10px] md:text-xs text-secondary font-semibold bg-gradient-to-r from-secondary to-primary bg-clip-text text-transparent">
                   Study & Work In The UK
                 </span>
               </div>

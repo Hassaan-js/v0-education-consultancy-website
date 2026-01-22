@@ -4,33 +4,33 @@ import { useEffect, useState } from "react"
 import Image from "next/image"
 
 const universities = [
-  { name: "Ulster University", logo: "/universities/ulster.jpg", website: "https://www.ulster.ac.uk" },
-  { name: "Teesside University", logo: "/universities/teesside.jpg", website: "https://www.tees.ac.uk" },
-  { name: "Anglia Ruskin University", logo: "/universities/anglia-ruskin.jpg", website: "https://www.anglia.ac.uk" },
-  { name: "Keele University", logo: "/universities/keele.jpg", website: "https://www.keele.ac.uk" },
+  { name: "Ulster University", logo: "/universities/ulster.png", website: "https://www.ulster.ac.uk" },
+  { name: "Teesside University", logo: "/universities/teesside.png", website: "https://www.tees.ac.uk" },
+  { name: "Anglia Ruskin University", logo: "/universities/anglia-ruskin.png", website: "https://www.anglia.ac.uk" },
+  { name: "Keele University", logo: "/universities/keele.png", website: "https://www.keele.ac.uk" },
   {
     name: "London Metropolitan University",
-    logo: "/universities/london-metro.jpg",
+    logo: "/universities/london-metro.png",
     website: "https://www.londonmet.ac.uk",
   },
-  { name: "University of Hull", logo: "/universities/hull.jpg", website: "https://www.hull.ac.uk" },
-  { name: "Middlesex University", logo: "/universities/middlesex.jpg", website: "https://www.mdx.ac.uk" },
-  { name: "University of Bedfordshire", logo: "/universities/bedfordshire.jpg", website: "https://www.beds.ac.uk" },
+  { name: "University of Hull", logo: "/universities/hull.png", website: "https://www.hull.ac.uk" },
+  { name: "Middlesex University", logo: "/universities/middlesex.png", website: "https://www.mdx.ac.uk" },
+  { name: "University of Bedfordshire", logo: "/universities/bedfordshire.png", website: "https://www.beds.ac.uk" },
   { name: "University of Wolverhampton", logo: "/universities/wolverhampton.jpg", website: "https://www.wlv.ac.uk" },
-  { name: "Northumbria University", logo: "/universities/northumbria.jpg", website: "https://www.northumbria.ac.uk" },
-  { name: "University of Portsmouth", logo: "/universities/portsmouth.jpg", website: "https://www.port.ac.uk" },
+  { name: "Northumbria University", logo: "/universities/northumbria.png", website: "https://www.northumbria.ac.uk" },
+  { name: "University of Portsmouth", logo: "/universities/portsmouth.png", website: "https://www.port.ac.uk" },
   {
     name: "Glasgow Caledonian University",
-    logo: "/universities/glasgow-caledonian.jpg",
+    logo: "/universities/glasgow-caledonian.png",
     website: "https://www.gcu.ac.uk",
   },
   {
     name: "Canterbury Christ Church University",
-    logo: "/universities/canterbury.jpg",
+    logo: "/universities/canterbury.png",
     website: "https://www.canterbury.ac.uk",
   },
-  { name: "University of Roehampton", logo: "/universities/roehampton.jpg", website: "https://www.roehampton.ac.uk" },
-  { name: "Coventry University", logo: "/universities/coventry.jpg", website: "https://www.coventry.ac.uk" },
+  { name: "University of Roehampton", logo: "/universities/roehampton.png", website: "https://www.roehampton.ac.uk" },
+  { name: "Coventry University", logo: "/universities/coventry.png", website: "https://www.coventry.ac.uk" },
 ]
 
 export default function PartnerUniversities() {
