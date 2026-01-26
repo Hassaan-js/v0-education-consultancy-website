@@ -47,9 +47,9 @@ export default function Navigation() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20 md:h-24">
-            <Link href="/" className="flex flex-col items-center group py-1">
-              <div className="relative w-16 h-16 md:w-20 md:h-20 -mb-1">
+          <div className="flex justify-between items-center h-24 md:h-28">
+            <Link href="/" className="flex flex-col items-center group py-0.5">
+              <div className="relative w-20 h-20 md:w-24 md:h-24 -mb-1.5">
                 <Image
                   src="/logo.png"
                   alt="Express Consultancy Logo"
