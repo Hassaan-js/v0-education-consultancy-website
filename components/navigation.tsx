@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { Menu, X } from "lucide-react"
+import { Menu, X, Phone, MessageCircle } from "lucide-react"
 import Image from "next/image"
 import ConsultationModal from "./consultation-modal"
 
@@ -47,22 +47,21 @@ export default function Navigation() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-24 md:h-28">
-            <Link href="/" className="flex flex-col items-center group py-0.5">
-              <div className="relative w-20 h-20 md:w-24 md:h-24 -mb-1.5">
-                <Image
-                  src="/logo.png"
-                  alt="Express Consultancy Logo"
-                  fill
-                  className="object-contain group-hover:scale-105 transition-transform duration-300"
-                  priority
-                />
-              </div>
-              <div className="flex flex-col items-center leading-tight">
-                <span className="font-bold text-foreground text-sm md:text-base tracking-tight">
+          <div className="flex justify-between items-center h-20 md:h-24">
+            <Link href="/" className="flex items-center gap-3 group">
+              <Image
+                src="/logo.png"
+                alt="Express Consultancy Logo"
+                width={50}
+                height={50}
+                className="w-12 h-12 md:w-14 md:h-14 object-contain group-hover:scale-110 transition-transform duration-300"
+                priority
+              />
+              <div className="hidden sm:flex flex-col leading-tight">
+                <span className="font-bold text-foreground text-base md:text-lg tracking-tight">
                   Express Consultancy
                 </span>
-                <span className="text-[10px] md:text-xs text-secondary font-semibold bg-gradient-to-r from-secondary to-primary bg-clip-text text-transparent">
+                <span className="text-xs text-secondary font-semibold bg-gradient-to-r from-secondary to-primary bg-clip-text text-transparent">
                   Study & Work In The UK
                 </span>
               </div>
@@ -84,13 +83,13 @@ export default function Navigation() {
             <div className="hidden md:flex items-center gap-3 lg:gap-4">
               <button
                 onClick={() => scrollToSection("#contact")}
-                className="button-primary shadow-lg text-sm font-semibold px-6 py-2.5"
+                className="button-primary shadow-lg text-sm font-semibold px-6 py-3"
               >
                 Contact Us
               </button>
               <button
                 onClick={() => setShowConsultationModal(true)}
-                className="text-primary hover:text-primary/80 transition-colors text-sm font-bold px-4 py-2 rounded-full hover:bg-primary/5 border border-primary/20"
+                className="button-secondary text-xs font-medium px-4 py-2"
               >
                 Free Consultation
               </button>
@@ -115,16 +114,15 @@ export default function Navigation() {
                 ))}
               </div>
               <div className="px-4 py-4 space-y-3 border-t border-border/40 mt-4">
-                <button
-                  onClick={() => scrollToSection("#contact")}
-                  className="button-primary w-full text-center block"
+                <a
+                  href="https://wa.me/923515123456?text=Hi! I'd like to learn more about UK education consultancy services."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="button-secondary w-full text-center block"
                 >
-                  Contact Us
-                </button>
-                <button
-                  onClick={() => setShowConsultationModal(true)}
-                  className="w-full text-center py-3 px-4 text-primary font-bold text-sm rounded-full border border-primary/20 hover:bg-primary/5 transition-all"
-                >
+                  WhatsApp Us
+                </a>
+                <button onClick={() => setShowConsultationModal(true)} className="button-primary w-full">
                   Free Consultation
                 </button>
               </div>

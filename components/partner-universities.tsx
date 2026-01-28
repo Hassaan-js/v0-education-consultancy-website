@@ -4,33 +4,33 @@ import { useEffect, useState } from "react"
 import Image from "next/image"
 
 const universities = [
-  { name: "Ulster University", logo: "/universities/ulster.png", website: "https://www.ulster.ac.uk" },
-  { name: "Teesside University", logo: "/universities/teesside.png", website: "https://www.tees.ac.uk" },
-  { name: "Anglia Ruskin University", logo: "/universities/anglia-ruskin.png", website: "https://www.anglia.ac.uk" },
-  { name: "Keele University", logo: "/universities/keele.png", website: "https://www.keele.ac.uk" },
+  { name: "Ulster University", logo: "/universities/ulster.jpg", website: "https://www.ulster.ac.uk" },
+  { name: "Teesside University", logo: "/universities/teesside.jpg", website: "https://www.tees.ac.uk" },
+  { name: "Anglia Ruskin University", logo: "/universities/anglia-ruskin.jpg", website: "https://www.anglia.ac.uk" },
+  { name: "Keele University", logo: "/universities/keele.jpg", website: "https://www.keele.ac.uk" },
   {
     name: "London Metropolitan University",
-    logo: "/universities/london-metro.png",
+    logo: "/universities/london-metro.jpg",
     website: "https://www.londonmet.ac.uk",
   },
-  { name: "University of Hull", logo: "/universities/hull.png", website: "https://www.hull.ac.uk" },
-  { name: "Middlesex University", logo: "/universities/middlesex.png", website: "https://www.mdx.ac.uk" },
-  { name: "University of Bedfordshire", logo: "/universities/bedfordshire.png", website: "https://www.beds.ac.uk" },
+  { name: "University of Hull", logo: "/universities/hull.jpg", website: "https://www.hull.ac.uk" },
+  { name: "Middlesex University", logo: "/universities/middlesex.jpg", website: "https://www.mdx.ac.uk" },
+  { name: "University of Bedfordshire", logo: "/universities/bedfordshire.jpg", website: "https://www.beds.ac.uk" },
   { name: "University of Wolverhampton", logo: "/universities/wolverhampton.jpg", website: "https://www.wlv.ac.uk" },
-  { name: "Northumbria University", logo: "/universities/northumbria.png", website: "https://www.northumbria.ac.uk" },
-  { name: "University of Portsmouth", logo: "/universities/portsmouth.png", website: "https://www.port.ac.uk" },
+  { name: "Northumbria University", logo: "/universities/northumbria.jpg", website: "https://www.northumbria.ac.uk" },
+  { name: "University of Portsmouth", logo: "/universities/portsmouth.jpg", website: "https://www.port.ac.uk" },
   {
     name: "Glasgow Caledonian University",
-    logo: "/universities/glasgow-caledonian.png",
+    logo: "/universities/glasgow-caledonian.jpg",
     website: "https://www.gcu.ac.uk",
   },
   {
     name: "Canterbury Christ Church University",
-    logo: "/universities/canterbury.png",
+    logo: "/universities/canterbury.jpg",
     website: "https://www.canterbury.ac.uk",
   },
-  { name: "University of Roehampton", logo: "/universities/roehampton.png", website: "https://www.roehampton.ac.uk" },
-  { name: "Coventry University", logo: "/universities/coventry.png", website: "https://www.coventry.ac.uk" },
+  { name: "University of Roehampton", logo: "/universities/roehampton.jpg", website: "https://www.roehampton.ac.uk" },
+  { name: "Coventry University", logo: "/universities/coventry.jpg", website: "https://www.coventry.ac.uk" },
 ]
 
 export default function PartnerUniversities() {
@@ -75,18 +75,18 @@ export default function PartnerUniversities() {
                 href={uni.website}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-shrink-0 w-1/2 md:w-1/3 lg:w-1/5 card-premium group cursor-pointer flex flex-col items-center justify-center aspect-square transition-all duration-500 hover:shadow-2xl hover:scale-105"
+                className="flex-shrink-0 w-1/2 md:w-1/3 lg:w-1/5 card-premium group cursor-pointer flex flex-col items-stretch transition-all duration-500 hover:shadow-2xl hover:scale-105 overflow-hidden"
               >
-                <div className="relative w-24 h-24 mb-3 group-hover:scale-110 transition-transform duration-300">
+                <div className="relative flex-1 w-full min-h-[140px] p-2 group-hover:scale-105 transition-transform duration-300 bg-white">
                   <Image
                     src={uni.logo || "/placeholder.svg"}
                     alt={`${uni.name} logo`}
                     fill
-                    className="object-contain"
+                    className="object-contain p-1"
                     loading="lazy"
                   />
                 </div>
-                <p className="font-bold text-center text-xs md:text-sm text-foreground text-balance">{uni.name}</p>
+                <p className="font-bold text-center text-xs md:text-sm text-foreground py-3 px-2 bg-gray-50 border-t">{uni.name}</p>
               </a>
             ))}
           </div>
