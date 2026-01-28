@@ -48,8 +48,8 @@ export default function Navigation() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-24 md:h-28">
-            <Link href="/" className="flex flex-col items-center group py-0.5">
-              <div className="relative w-20 h-20 md:w-24 md:h-24 -mb-1.5">
+            <Link href="/" className="flex flex-col items-center group py-1">
+              <div className="relative w-32 h-16 md:w-40 md:h-20 mb-0.5">
                 <Image
                   src="/logo.png"
                   alt="Express Consultancy Logo"
@@ -58,11 +58,11 @@ export default function Navigation() {
                   priority
                 />
               </div>
-              <div className="flex flex-col items-center leading-tight">
-                <span className="font-bold text-foreground text-sm md:text-base tracking-tight">
+              <div className="flex flex-col items-center leading-none">
+                <span className="font-bold text-foreground text-xs md:text-sm tracking-tight">
                   Express Consultancy
                 </span>
-                <span className="text-[10px] md:text-xs text-secondary font-semibold bg-gradient-to-r from-secondary to-primary bg-clip-text text-transparent">
+                <span className="text-[9px] md:text-[10px] text-secondary font-semibold bg-gradient-to-r from-secondary to-primary bg-clip-text text-transparent">
                   Study & Work In The UK
                 </span>
               </div>
