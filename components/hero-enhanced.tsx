@@ -28,7 +28,7 @@ export default function HeroEnhanced() {
         </div>
 
         <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 lg:gap-16 xl:gap-24 items-center">
+          <div className="grid md:grid-cols-2 gap-12 lg:gap-16 xl:gap-24 items-start">
             <div
               className={`space-y-8 lg:space-y-10 transition-all duration-1200 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
             >
@@ -90,15 +90,15 @@ export default function HeroEnhanced() {
             </div>
 
             <div
-              className={`relative h-full min-h-96 md:min-h-[550px] hidden md:flex items-center justify-center transition-all duration-1500 delay-300 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-12"}`}
+              className={`relative hidden md:block transition-all duration-1500 delay-300 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-12"}`}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-secondary/8 to-accent/8 rounded-3xl blur-3xl glow-animation" />
 
-              <div className="relative w-full aspect-square max-w-md">
+              <div className="relative w-full h-full">
                 <img
                   src="/students-at-uk-university-campus.jpg"
                   alt="International students at UK universities"
-                  className="w-full h-full object-cover rounded-3xl shadow-premium border border-white/30 hover:shadow-premium-hover transition-all duration-500"
+                  className="w-full h-full min-h-[500px] lg:min-h-[600px] object-cover rounded-3xl shadow-premium border border-white/30 hover:shadow-premium-hover transition-all duration-500"
                   loading="lazy"
                 />
 
