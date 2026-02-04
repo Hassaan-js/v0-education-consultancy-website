@@ -4,9 +4,9 @@ import { useEffect, useState } from "react"
 import Image from "next/image"
 
 const universities = [
-  { name: "Ulster University", logo: "/universities/ulster.png", website: "https://www.ulster.ac.uk" },
-  { name: "Teesside University", logo: "/universities/teesside.png", website: "https://www.tees.ac.uk" },
-  { name: "Anglia Ruskin University", logo: "/universities/anglia-ruskin.png", website: "https://www.anglia.ac.uk" },
+  { name: "Ulster University", logo: "/universities/ulster.jpg", website: "https://www.ulster.ac.uk" },
+  { name: "Teesside University", logo: "/universities/teesside.jpg", website: "https://www.tees.ac.uk" },
+  { name: "Anglia Ruskin University", logo: "/universities/anglia-ruskin.jpg", website: "https://www.anglia.ac.uk" },
   { name: "Keele University", logo: "/universities/keele.png", website: "https://www.keele.ac.uk" },
   {
     name: "London Metropolitan University",
@@ -63,6 +63,14 @@ export default function PartnerUniversities() {
         </div>
 
         <div className="overflow-hidden relative">
+          <button
+            type="button"
+            aria-label="Scroll partner universities backward"
+            onClick={() => setScrollPosition((prev) => (prev - 1 + universities.length) % universities.length)}
+            className="flex items-center justify-center absolute left-4 top-1/2 -translate-y-1/2 z-10 h-11 w-11 rounded-full border border-primary/20 bg-white/90 text-primary shadow-lg transition hover:bg-primary hover:text-white"
+          >
+            <span aria-hidden="true">←</span>
+          </button>
           <div
             className="flex gap-4 transition-transform duration-500 ease-out"
             style={{
@@ -75,9 +83,9 @@ export default function PartnerUniversities() {
                 href={uni.website}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-shrink-0 w-1/2 md:w-1/3 lg:w-1/5 card-premium group cursor-pointer flex flex-col items-center justify-center aspect-square transition-all duration-500 hover:shadow-2xl hover:scale-105"
+                className="flex-shrink-0 w-1/2 md:w-1/3 lg:w-1/5 card-premium group cursor-pointer flex flex-col items-center justify-center aspect-square !px-4 !py-6 md:!px-6 transition-all duration-500 hover:shadow-2xl hover:scale-105"
               >
-                <div className="relative w-24 h-24 mb-3 group-hover:scale-110 transition-transform duration-300">
+                <div className="relative w-28 h-28 md:w-32 md:h-32 mb-4 group-hover:scale-110 transition-transform duration-300">
                   <Image
                     src={uni.logo || "/placeholder.svg"}
                     alt={`${uni.name} logo`}
@@ -90,6 +98,14 @@ export default function PartnerUniversities() {
               </a>
             ))}
           </div>
+          <button
+            type="button"
+            aria-label="Scroll partner universities forward"
+            onClick={() => setScrollPosition((prev) => (prev + 1) % universities.length)}
+            className="flex items-center justify-center absolute right-4 top-1/2 -translate-y-1/2 z-10 h-11 w-11 rounded-full border border-primary/20 bg-white/90 text-primary shadow-lg transition hover:bg-primary hover:text-white"
+          >
+            <span aria-hidden="true">→</span>
+          </button>
         </div>
       </div>
     </section>
