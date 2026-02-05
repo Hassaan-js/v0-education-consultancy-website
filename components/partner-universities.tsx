@@ -35,11 +35,8 @@ const universities = [
 
 export default function PartnerUniversities() {
   const [scrollPosition, setScrollPosition] = useState(0)
-  const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
-    setIsVisible(true)
-
     const interval = setInterval(() => {
       setScrollPosition((prev) => (prev + 1) % universities.length)
     }, 5000)
@@ -72,7 +69,7 @@ export default function PartnerUniversities() {
             <span aria-hidden="true">←</span>
           </button>
           <div
-            className="flex gap-4 transition-transform duration-500 ease-out"
+            className="flex gap-4 px-14 transition-transform duration-500 ease-out"
             style={{
               transform: `translateX(-${scrollPosition * (100 / 5)}%)`,
             }}
@@ -83,6 +80,9 @@ export default function PartnerUniversities() {
                 href={uni.website}
                 target="_blank"
                 rel="noopener noreferrer"
+                className="flex-shrink-0 w-1/2 md:w-1/3 lg:w-1/5 card-premium group cursor-pointer flex flex-col items-center justify-center aspect-square !p-2 md:!p-3 transition-all duration-500 hover:shadow-2xl hover:scale-105"
+              >
+                <div className="relative w-32 h-32 md:w-36 md:h-36 mb-4 group-hover:scale-110 transition-transform duration-300">
                 className="flex-shrink-0 w-1/2 md:w-1/3 lg:w-1/5 card-premium group cursor-pointer flex flex-col items-center justify-center aspect-square !px-4 !py-6 md:!px-6 transition-all duration-500 hover:shadow-2xl hover:scale-105"
               >
                 <div className="relative w-28 h-28 md:w-32 md:h-32 mb-4 group-hover:scale-110 transition-transform duration-300">
