@@ -1,6 +1,7 @@
 import type React from "react"
 import type { Metadata } from "next"
 
+import Script from "next/script"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 
@@ -111,8 +112,10 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="format-detection" content="telephone=yes" />
         <link rel="canonical" href="https://expressconsultancy.co.uk" />
-        <script
+        <Script
+          id="organization-schema"
           type="application/ld+json"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
