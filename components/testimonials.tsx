@@ -87,55 +87,74 @@ export default function Testimonials() {
   }, [])
 
   return (
-    <section id="testimonials" className="premium-section bg-background">
+    <section id="testimonials" className="premium-section bg-background relative overflow-hidden">
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/3 right-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl" />
+      </div>
+
       <div className="max-w-7xl mx-auto">
-        <div className="text-center space-y-6 mb-20">
+        <div className="text-center space-y-6 mb-24">
           <div className="inline-block mx-auto">
-            <p className="text-primary font-semibold text-xs tracking-widest uppercase bg-primary/5 px-4 py-2 rounded-full hover:bg-primary/10 transition-colors duration-300">
-              Student Success Stories
-            </p>
+            <div className="flex items-center gap-2 bg-gradient-to-r from-primary/10 to-secondary/10 px-4 py-2 rounded-full border border-primary/20 hover:border-primary/40 transition-all duration-300 backdrop-blur-sm">
+              <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+              <p className="text-primary font-semibold text-xs tracking-widest uppercase">Student Success Stories</p>
+            </div>
           </div>
-          <h2 className="text-5xl md:text-6xl font-bold text-foreground premium-heading">What Our Students Say</h2>
+          <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground premium-heading text-balance">
+            What Our Students Say
+          </h2>
+          <p className="text-xl text-foreground/75 max-w-3xl mx-auto font-medium">
+            Real experiences from international students who achieved their UK education dreams with Express Consultancy's expert guidance.
+          </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
               ref={(el) => {
                 cardsRef.current[index] = el
               }}
-              className={`card-premium group transition-all duration-500 ${
+              className={`card-premium group relative overflow-hidden transition-all duration-500 ${
                 visibleCards.has(index) ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
-              <div className="absolute -top-4 -right-4 bg-primary/10 p-3 rounded-full group-hover:bg-primary group-hover:scale-110 transition-all duration-300">
-                <Quote size={20} className="text-primary group-hover:text-white transition-colors duration-300" />
-              </div>
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/0 to-secondary/0 group-hover:from-primary/5 group-hover:to-secondary/5 rounded-2xl transition-all duration-500" />
 
-              <div className="flex gap-1 mb-4">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} size={16} className="fill-primary text-primary" />
-                ))}
-                <span className="text-xs text-gray-500 ml-2">a year ago</span>
-              </div>
+              <div className="relative z-10 space-y-6 h-full flex flex-col">
+                <div className="flex items-start justify-between">
+                  <div className="flex gap-1">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} size={18} className="fill-primary text-primary" />
+                    ))}
+                  </div>
+                  <Quote size={24} className="text-primary/20 group-hover:text-primary/50 transition-colors duration-300" />
+                </div>
 
-              <p className="text-gray-700 mb-6 leading-relaxed text-sm italic font-medium">"{testimonial.quote}"</p>
+                <p className="text-foreground/85 leading-relaxed text-base font-medium flex-grow">
+                  "{testimonial.quote}"
+                </p>
 
-              <div className="border-t border-border/60 pt-4 flex items-center gap-3">
-                <img
-                  src={testimonial.image || "/placeholder.svg"}
-                  alt={testimonial.name}
-                  className="w-10 h-10 rounded-full object-cover border border-border/60"
-                  loading="lazy"
-                />
-                <div>
-                  <p className="font-bold text-foreground text-sm">{testimonial.name}</p>
-                  <p className="text-primary text-xs font-semibold">
-                    {testimonial.reviews} review{testimonial.reviews > 1 ? "s" : ""}
-                  </p>
-                  <p className="text-gray-500 text-xs">{testimonial.location}</p>
+                <div className="border-t border-border/60 pt-6 flex items-center gap-4">
+                  <img
+                    src={testimonial.image || "/placeholder.svg"}
+                    alt={testimonial.name}
+                    className="w-14 h-14 rounded-full object-cover border-2 border-primary/20 group-hover:border-primary transition-all duration-300"
+                    loading="lazy"
+                  />
+                  <div className="flex-grow">
+                    <p className="font-bold text-foreground text-base group-hover:text-primary transition-colors duration-300">
+                      {testimonial.name}
+                    </p>
+                    <p className="text-primary text-sm font-semibold">
+                      {testimonial.location}
+                    </p>
+                    <p className="text-foreground/60 text-xs font-medium">
+                      {testimonial.reviews} review{testimonial.reviews > 1 ? "s" : ""} • a year ago
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

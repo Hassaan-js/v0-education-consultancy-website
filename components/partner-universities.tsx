@@ -48,48 +48,64 @@ export default function PartnerUniversities() {
   }, [])
 
   return (
-    <section className="premium-section bg-gradient-to-b from-muted/40 to-background">
+    <section className="premium-section bg-gradient-to-br from-background via-muted/30 to-secondary/5 relative overflow-hidden">
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-1/2 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-1/3 w-96 h-96 bg-secondary/5 rounded-full blur-3xl" />
+      </div>
+
       <div className="max-w-7xl mx-auto">
-        <div className="text-center space-y-4 mb-16">
-          <p className="text-primary font-semibold text-xs tracking-widest uppercase bg-primary/10 px-4 py-2 rounded-full hover:bg-primary/15 transition-colors inline-block mx-auto backdrop-blur-sm">
-            Our Network
-          </p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground premium-heading">
+        <div className="text-center space-y-6 mb-24">
+          <div className="inline-block mx-auto">
+            <div className="flex items-center gap-2 bg-gradient-to-r from-primary/10 to-secondary/10 px-4 py-2 rounded-full border border-primary/20 hover:border-primary/40 transition-all duration-300 backdrop-blur-sm">
+              <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+              <p className="text-primary font-semibold text-xs tracking-widest uppercase">Our Network</p>
+            </div>
+          </div>
+          <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground premium-heading text-balance">
             Partner Universities
           </h2>
-          <p className="text-base md:text-lg text-gray-600 max-w-2xl mx-auto font-medium">
-            We work with 40+ top-tier universities across the UK. Here are some of our key partners.
+          <p className="text-xl text-foreground/75 max-w-3xl mx-auto font-medium">
+            We partner with 40+ top-tier universities across the UK and beyond. Connect with world-class institutions through our network.
           </p>
         </div>
 
-        <div className="overflow-hidden relative">
-          <div
-            className="flex gap-4 transition-transform duration-500 ease-out"
-            style={{
-              transform: `translateX(-${scrollPosition * (100 / 5)}%)`,
-            }}
-          >
-            {universities.map((uni, index) => (
-              <a
-                key={index}
-                href={uni.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-shrink-0 w-1/2 md:w-1/3 lg:w-1/5 card-premium group cursor-pointer flex flex-col items-stretch transition-all duration-500 hover:shadow-2xl hover:scale-105 overflow-hidden"
-              >
-                <div className="relative flex-1 w-full min-h-[140px] p-2 group-hover:scale-105 transition-transform duration-300 bg-white">
-                  <Image
-                    src={uni.logo || "/placeholder.svg"}
-                    alt={`${uni.name} logo`}
-                    fill
-                    className="object-contain p-1"
-                    loading="lazy"
-                  />
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 lg:gap-8">
+          {universities.map((uni, index) => (
+            <a
+              key={index}
+              href={uni.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="card-premium group cursor-pointer flex flex-col items-stretch transition-all duration-500 overflow-hidden hover:shadow-premium-hover"
+              style={{
+                animation: isVisible ? `fadeInUp 0.6s ease-out forwards` : "none",
+                animationDelay: `${index * 50}ms`,
+              }}
+            >
+              <div className="relative flex-1 w-full min-h-[160px] p-4 bg-gradient-to-br from-white to-gray-50 flex items-center justify-center group-hover:from-primary/5 group-hover:to-secondary/5 transition-colors duration-300">
+                <Image
+                  src={uni.logo || "/placeholder.svg"}
+                  alt={`${uni.name} logo`}
+                  width={120}
+                  height={120}
+                  className="object-contain group-hover:scale-110 transition-transform duration-300"
+                  loading="lazy"
+                />
+              </div>
+              <div className="p-4 bg-gradient-to-b from-white to-gray-50 border-t border-border/60 group-hover:from-primary/5 group-hover:to-secondary/5 transition-colors duration-300">
+                <p className="font-bold text-center text-sm text-foreground group-hover:text-primary transition-colors duration-300 line-clamp-2">
+                  {uni.name}
+                </p>
+                <div className="flex items-center justify-center gap-1.5 mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span className="text-primary text-xs font-semibold">Visit</span>
+                  <svg className="w-3 h-3 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
                 </div>
-                <p className="font-bold text-center text-xs md:text-sm text-foreground py-3 px-2 bg-gray-50 border-t">{uni.name}</p>
-              </a>
-            ))}
-          </div>
+              </div>
+            </a>
+          ))}
         </div>
       </div>
     </section>

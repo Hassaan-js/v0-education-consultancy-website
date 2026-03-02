@@ -2,12 +2,14 @@ import type { Metadata } from "next"
 import Navigation from "@/components/navigation"
 import TickBar from "@/components/tick-bar"
 import HeroEnhanced from "@/components/hero-enhanced"
+import About from "@/components/about"
 import PopularCourses from "@/components/popular-courses"
 import Services from "@/components/services"
 import SuccessStories from "@/components/success-stories"
 import PartnerUniversities from "@/components/partner-universities"
 import AdmissionProcess from "@/components/admission-process"
 import ContactSection from "@/components/contact-section"
+import CTA from "@/components/cta"
 import Footer from "@/components/footer"
 
 export const metadata: Metadata = {
@@ -32,6 +34,9 @@ export default function Home() {
       <TickBar />
       <main className="bg-background overflow-hidden">
         <HeroEnhanced />
+        <section id="about" aria-labelledby="about-heading">
+          <About />
+        </section>
         <section id="courses" aria-labelledby="courses-heading">
           <PopularCourses />
         </section>
@@ -49,6 +54,9 @@ export default function Home() {
         </section>
         <section id="contact" aria-labelledby="contact-heading">
           <ContactSection />
+        </section>
+        <section id="cta" aria-labelledby="cta-heading">
+          <CTA />
         </section>
       </main>
       <Footer />

@@ -33,54 +33,61 @@ export default function About() {
   }, [])
 
   return (
-    <section id="why-us" className="premium-section bg-gradient-to-b from-background to-muted/20" ref={ref}>
+    <section id="about" className="premium-section bg-gradient-to-br from-background via-muted/20 to-secondary/5 relative overflow-hidden" ref={ref}>
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-1/4 left-0 w-96 h-96 bg-secondary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+      </div>
+
       <div className="max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
+        <div className="grid md:grid-cols-2 gap-16 lg:gap-20 items-center">
           {/* Left Visual */}
           <div
-            className={`relative h-96 md:h-full hidden md:block transition-all duration-1000 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"}`}
+            className={`relative h-96 md:h-[500px] lg:h-[600px] hidden md:block transition-all duration-1000 group ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-12"}`}
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-secondary/10 to-primary/10 rounded-3xl blur-3xl" />
+            <div className="absolute -inset-4 bg-gradient-to-br from-primary via-secondary to-accent rounded-3xl blur-2xl opacity-20 group-hover:opacity-30 transition-opacity duration-500" />
             <img
               src="/professional-education-consultant-helping-diverse-.jpg"
               alt="Expert education consultants with diverse students discussing UK university admission"
-              className="w-full h-full object-cover rounded-3xl shadow-premium"
+              className="relative w-full h-full object-cover rounded-3xl shadow-premium-hover group-hover:shadow-premium-hover group-hover:scale-[1.02] transition-all duration-500 border-2 border-white/20"
               loading="lazy"
             />
           </div>
 
           {/* Right Content */}
           <div
-            className={`space-y-10 transition-all duration-1000 delay-300 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"}`}
+            className={`space-y-12 transition-all duration-1000 delay-300 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-12"}`}
           >
-            <div className="space-y-6">
+            <div className="space-y-8">
               <div className="inline-block">
-                <p className="text-primary font-semibold text-xs tracking-widest uppercase bg-primary/5 px-4 py-2 rounded-full hover:bg-primary/10 transition-colors duration-300">
-                  Why Choose Express Consultancy
-                </p>
+                <div className="flex items-center gap-2 bg-gradient-to-r from-primary/10 to-secondary/10 px-4 py-2 rounded-full border border-primary/20 hover:border-primary/40 transition-all duration-300 backdrop-blur-sm">
+                  <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+                  <p className="text-primary font-semibold text-xs tracking-widest uppercase">Why Choose Express Consultancy</p>
+                </div>
               </div>
-              <h2 className="text-5xl md:text-6xl font-bold text-foreground leading-tight premium-heading">
+              <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight premium-heading text-balance">
                 Excellence in UK Education Consulting
               </h2>
-              <p className="text-lg text-gray-600 leading-relaxed font-medium">
-                Express Consultancy has been the trusted partner for international students seeking admission to top UK
-                universities. With offices in Pakistan and the UK, we provide personalized, professional guidance
-                throughout your entire journey.
+              <p className="text-xl text-foreground/75 leading-relaxed font-medium max-w-lg">
+                Express Consultancy has been the trusted partner for international students seeking admission to top UK universities. With offices in Pakistan and the UK, we provide personalized, professional guidance throughout your entire journey.
               </p>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-5">
               {highlights.map((highlight, index) => (
                 <div
                   key={index}
-                  className="flex items-start gap-4 group"
-                  style={{ transitionDelay: `${index * 50}ms` }}
+                  className="flex items-start gap-4 group p-4 rounded-lg hover:bg-primary/5 transition-all duration-300"
+                  style={{ 
+                    animation: isVisible ? `fadeInUp 0.6s ease-out forwards` : "none",
+                    animationDelay: `${index * 80}ms`
+                  }}
                 >
                   <CheckCircle
-                    className="text-primary flex-shrink-0 mt-0.5 group-hover:scale-110 group-hover:text-secondary transition-all duration-300"
-                    size={22}
+                    className="text-primary flex-shrink-0 mt-1 group-hover:scale-125 group-hover:text-secondary transition-all duration-300"
+                    size={24}
                   />
-                  <p className="text-gray-700 font-medium text-base leading-relaxed">{highlight}</p>
+                  <p className="text-foreground/80 font-medium text-base leading-relaxed group-hover:text-foreground transition-colors duration-300">{highlight}</p>
                 </div>
               ))}
             </div>
