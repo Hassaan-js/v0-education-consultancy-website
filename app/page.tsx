@@ -49,6 +49,20 @@ const testimonials = [
   { quote: "We moved from fragmented vendors to one connected growth system — and the momentum has been undeniable.", name: "Maya Chen", role: "Founder · Meridian Ventures", mark: "MC" },
 ]
 
+function useMobilePerformance() {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const query = window.matchMedia("(max-width: 650px)")
+    const update = () => setIsMobile(query.matches)
+    update()
+    query.addEventListener?.("change", update)
+    return () => query.removeEventListener?.("change", update)
+  }, [])
+
+  return isMobile
+}
+
 function Reveal({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
   const reduce = useReducedMotion()
   return (
@@ -66,24 +80,26 @@ function Reveal({ children, delay = 0, className = "" }: { children: React.React
 
 function IntroLoader({ onComplete }: { onComplete: () => void }) {
   const reduce = useReducedMotion()
+  const isMobile = useMobilePerformance()
+  const loaderDuration = reduce ? 550 : isMobile ? 1450 : 2200
 
   useEffect(() => {
-    const timeout = window.setTimeout(onComplete, reduce ? 550 : 2200)
+    const timeout = window.setTimeout(onComplete, loaderDuration)
     return () => window.clearTimeout(timeout)
-  }, [onComplete, reduce])
+  }, [onComplete, loaderDuration])
 
   return (
     <motion.div className="intro-loader" initial={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: reduce ? 0.2 : 0.7, ease: [0.22, 1, 0.36, 1] }}>
       <div className="loader-topline"><span>ORCA ENTERPRISES</span><span>ISLAMABAD · GLOBAL</span></div>
       <div className="loader-center">
-        <motion.div className="earth-loader" animate={reduce ? undefined : { rotateY: 360 }} transition={{ duration: 12, repeat: Infinity, ease: "linear" }}>
+        <motion.div className="earth-loader" animate={reduce ? undefined : { rotateY: 360 }} transition={{ duration: isMobile ? 18 : 12, repeat: Infinity, ease: "linear" }}>
           <div className="earth-atmosphere" />
           <div className="earth-land land-a" />
           <div className="earth-land land-b" />
           <div className="earth-grid-lines" />
         </motion.div>
-        <motion.div className="loader-orbit orbit-a" animate={reduce ? undefined : { rotate: 360 }} transition={{ duration: 7, repeat: Infinity, ease: "linear" }} />
-        <motion.div className="loader-orbit orbit-b" animate={reduce ? undefined : { rotate: -360 }} transition={{ duration: 10, repeat: Infinity, ease: "linear" }} />
+        <motion.div className="loader-orbit orbit-a" animate={reduce ? undefined : { rotate: 360 }} transition={{ duration: isMobile ? 10 : 7, repeat: Infinity, ease: "linear" }} />
+        <motion.div className="loader-orbit orbit-b" animate={reduce ? undefined : { rotate: -360 }} transition={{ duration: isMobile ? 14 : 10, repeat: Infinity, ease: "linear" }} />
         <motion.div className="loader-wordmark" initial={reduce ? false : { opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: reduce ? 0 : 0.35, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}>
           <span>ORCA</span><em>ENTERPRISES</em>
         </motion.div>
@@ -104,7 +120,9 @@ const particleSeeds = Array.from({ length: 22 }, (_, index) => ({
 
 function ParticleField() {
   const reduce = useReducedMotion()
-  return <div className="particle-field" aria-hidden="true">{particleSeeds.map((particle, index) => <motion.span key={index} className="particle" style={{ left: particle.left, top: particle.top, width: particle.size, height: particle.size }} animate={reduce ? undefined : { y: [0, -18, 0], x: [0, index % 2 ? 10 : -10, 0], opacity: [0.12, index % 4 === 0 ? 0.9 : 0.45, 0.12], scale: [0.8, 1.25, 0.8] }} transition={{ duration: particle.duration, delay: particle.delay, repeat: Infinity, ease: "easeInOut" }} />)}</div>
+  const isMobile = useMobilePerformance()
+  const particles = isMobile ? particleSeeds.slice(0, 8) : particleSeeds
+  return <div className="particle-field" aria-hidden="true">{particles.map((particle, index) => <motion.span key={index} className="particle" style={{ left: particle.left, top: particle.top, width: particle.size, height: particle.size }} animate={reduce ? undefined : isMobile ? { y: [0, -8, 0], opacity: [0.1, index % 4 === 0 ? 0.65 : 0.3, 0.1] } : { y: [0, -18, 0], x: [0, index % 2 ? 10 : -10, 0], opacity: [0.12, index % 4 === 0 ? 0.9 : 0.45, 0.12], scale: [0.8, 1.25, 0.8] }} transition={{ duration: isMobile ? particle.duration + 2 : particle.duration, delay: particle.delay, repeat: Infinity, ease: "easeInOut" }} />)}</div>
 }
 
 function TiltServiceCard({ Icon, label, text, index, active, onActivate }: { Icon: typeof Headphones; label: string; text: string; index: number; active: boolean; onActivate: () => void }) {
